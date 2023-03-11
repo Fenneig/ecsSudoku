@@ -1,3 +1,4 @@
+using EcsSudoku.Views;
 using UnityEngine;
 
 namespace EcsSudoku.Services
@@ -7,5 +8,6 @@ namespace EcsSudoku.Services
     {
         public int GridWidth;
         public int GridHeight;
+        public CellView CellView;
     }
 }
