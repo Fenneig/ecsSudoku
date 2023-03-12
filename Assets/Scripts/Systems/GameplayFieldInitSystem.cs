@@ -71,6 +71,8 @@ namespace EcsSudoku.Systems
                     var entity = world.NewEntity();
                     ref var cell = ref _cellPool.Value.Add(entity);
                     cell.View = cellView;
+                    cell.Coords = new Int2 {X = j, Y = j};
+                    cell.Value = table[i, j];
                 }
             }
 
