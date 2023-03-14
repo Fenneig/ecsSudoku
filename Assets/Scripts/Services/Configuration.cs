@@ -1,3 +1,4 @@
+using EcsSudoku.Systems;
 using EcsSudoku.Views;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ namespace EcsSudoku.Services
     {
         public int GridWidth;
         public int GridHeight;
-        public CellView CellView;
-        public GameObject AreaPrefab;
+        public CellView CellViewPrefab;
+        public Vector2 Offset;
     }
 }

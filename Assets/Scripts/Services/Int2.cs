@@ -1,13 +1,14 @@
-namespace EcsSudoku.Services
+﻿namespace EcsSudoku.Services
 {
     public struct Int2
     {
         public int X;
         public int Y;
 
-        public override string ToString()
+        public Int2(int x, int y)
         {
-            return $"Cell coords is {X},{Y}";
+            X = x;
+            Y = y;
         }
     }
 }
