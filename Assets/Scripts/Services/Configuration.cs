@@ -9,5 +9,6 @@ namespace EcsSudoku.Services
         public int GridWidth;
         public int GridHeight;
         public CellView CellView;
+        public GameObject AreaPrefab;
     }
 }

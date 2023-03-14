@@ -296,6 +296,7 @@ GameObject:
   - component: {fileID: 668482988}
   - component: {fileID: 668482987}
   - component: {fileID: 668482991}
+  - component: {fileID: 668482992}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -413,6 +414,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &668482992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 668482986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b063c93934787408083465660cb96d7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &798561763
 GameObject:
   m_ObjectHideFlags: 0
@@ -442,7 +455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77ef1853603aa63409f9fe15203ae928, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameplayPanelTransform: {fileID: 86172700}
+  GameplayPanelTransform: {fileID: 86172700}
 --- !u!4 &798561765
 Transform:
   m_ObjectHideFlags: 0
@@ -709,6 +722,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sceneData: {fileID: 798561764}
   _config: {fileID: 11400000, guid: e461e4928eeecd8448a87bbe4660d0e7, type: 2}
+  _uguiEmitter: {fileID: 668482992}
 --- !u!4 &2131136212
 Transform:
   m_ObjectHideFlags: 0

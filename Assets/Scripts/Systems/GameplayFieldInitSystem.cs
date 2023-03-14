@@ -1,10 +1,11 @@
 ﻿using EcsSudoku.Components;
 using EcsSudoku.Services;
-using EcsSudoku.Views;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
+using Unity.Mathematics;
 using UnityEngine;
 using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 
 namespace EcsSudoku.Systems
 {
@@ -20,7 +21,7 @@ namespace EcsSudoku.Systems
         public void Init(IEcsSystems systems)
         {
             var world = _cellPool.Value.GetWorld();
-            var cellViewPrefab = Resources.Load<CellView>("CellView");
+            var cellViewPrefab = _config.Value.CellView;
             var cellSize = cellViewPrefab.GetComponent<RectTransform>().rect.width;
             var table = new int[_config.Value.GridWidth, _config.Value.GridHeight];
 
@@ -32,7 +33,54 @@ namespace EcsSudoku.Systems
                 }
             }
 
-            for (int i = 0; i < 30; i++)
+            RandomizeTable(30, table);
+
+            for (int i = 0; i < _config.Value.GridWidth; i++)
+            {
+                for (int j = 0; j < _config.Value.GridHeight; j++)
+                {
+                    var posX = j * cellSize;
+                    var posY = (_config.Value.GridHeight - i - 1) * cellSize;
+                    var createPosition = new Vector3(posX, posY);
+                    var cellView = Object.Instantiate(cellViewPrefab,
+                                                      createPosition,
+                                                      Quaternion.identity,
+                                                      _sceneData.Value.GameplayPanelTransform);
+                    cellView.NumberText.text = table[i, j].ToString();
+
+                    var entity = world.NewEntity();
+                    ref var cell = ref _cellPool.Value.Add(entity);
+                    cell.View = cellView;
+                    cell.Coords = new Int2 {X = j, Y = j};
+                    cell.Value = table[i, j];
+
+                    _sceneData.Value.Cells[cell.Coords] = entity;
+                    cellView.Entity = entity;
+                }
+            }
+
+            for (int i = 0; i < _dimensionSize; i++)
+            {
+                for (int j = 0; j < _dimensionSize; j++)
+                {
+                    var posX = i * cellSize * _dimensionSize;
+                    var posY = j * cellSize * _dimensionSize;
+                    var createPosition = new Vector3(posX, posY);
+                    Object.Instantiate(_config.Value.AreaPrefab,
+                                       createPosition,
+                                       quaternion.identity,
+                                       _sceneData.Value.GameplayPanelTransform);
+                }
+            }
+
+            _sceneData.Value.InitSolvedTable(table);
+
+            //TODO erase extra numbers functional
+        }
+
+        private void RandomizeTable(int operationsCount, int[,] table)
+        {
+            for (int i = 0; i < operationsCount; i++)
             {
                 var function = Random.Range(0, 5);
                 switch (function)
@@ -54,29 +102,6 @@ namespace EcsSudoku.Systems
                         break;
                 }
             }
-
-            for (int i = 0; i < _config.Value.GridWidth; i++)
-            {
-                for (int j = 0; j < _config.Value.GridHeight; j++)
-                {
-                    var posX = j * cellSize;
-                    var posY = (_config.Value.GridHeight - i - 1) * cellSize;
-
-                    var cellView = Object.Instantiate(cellViewPrefab,
-                        new Vector3(posX, posY),
-                        Quaternion.identity,
-                        _sceneData.Value.GameplayPanelTransform);
-                    cellView.NumberText.text = table[i, j].ToString();
-
-                    var entity = world.NewEntity();
-                    ref var cell = ref _cellPool.Value.Add(entity);
-                    cell.View = cellView;
-                    cell.Coords = new Int2 {X = j, Y = j};
-                    cell.Value = table[i, j];
-                }
-            }
-
-            //TODO erase extra numbers functional
         }
 
         private void TransposeTable(int[,] table)

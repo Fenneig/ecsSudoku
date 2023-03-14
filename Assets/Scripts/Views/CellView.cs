@@ -1,12 +1,14 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace EcsSudoku.Views
 {
     public class CellView : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI _numberText;
-
-        public TextMeshProUGUI NumberText => _numberText;
+        public TextMeshProUGUI NumberText;
+        public Image Background;
+        [NonSerialized] public int Entity;
     }
 }
