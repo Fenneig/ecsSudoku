@@ -1,5 +1,7 @@
 using EcsSudoku.Services;
+using EcsSudoku.Systems;
 using Leopotam.EcsLite;
+using Leopotam.EcsLite.Di;
 using UnityEngine;
 
 namespace EcsSudoku
@@ -8,7 +10,7 @@ namespace EcsSudoku
     {
         [SerializeField] private SceneData _sceneData;
         [SerializeField] private Configuration _config;
-        
+
         EcsWorld _world;
         IEcsSystems _systems;
 
@@ -20,6 +22,8 @@ namespace EcsSudoku
                 // register your systems here, for example:
                 // .Add (new TestSystem1 ())
                 // .Add (new TestSystem2 ())
+                .Add(new InitFieldSystem())
+                .Add(new CreateCellViewSystem())
 
                 // register additional worlds here, for example:
                 // .AddWorld (new EcsWorld (), "events")
@@ -28,6 +32,7 @@ namespace EcsSudoku
                 // .Add (new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem ("events"))
                 .Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem())
 #endif
+                .Inject(_sceneData, _config)
                 .Init();
         }
 
