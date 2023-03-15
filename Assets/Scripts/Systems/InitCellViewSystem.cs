@@ -10,6 +10,7 @@ namespace EcsSudoku.Systems
     {
         private EcsFilterInject<Inc<Cell, Position>, Exc<CellViewRef>> _filter = default;
         private EcsCustomInject<Configuration> _config = default;
+        private EcsCustomInject<SceneData> _sceneData = default;
         private EcsPoolInject<CellViewRef> _cellViewRefPool = default;
 
         public void Init(IEcsSystems systems)
@@ -18,7 +19,7 @@ namespace EcsSudoku.Systems
             {
                 ref var position = ref _filter.Pools.Inc2.Get(entity);
 
-                var cellView = Object.Instantiate(_config.Value.CellViewPrefab);
+                var cellView = Object.Instantiate(_config.Value.CellViewPrefab, _sceneData.Value.Table);
 
                 cellView.transform.position = new Vector3(position.Value.X + _config.Value.Offset.x * position.Value.X,
                                                           position.Value.Y + _config.Value.Offset.y * position.Value.Y); 

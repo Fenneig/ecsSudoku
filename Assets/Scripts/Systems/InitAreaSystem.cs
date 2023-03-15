@@ -9,6 +9,7 @@ namespace EcsSudoku.Systems
     public class InitAreaSystem : IEcsInitSystem
     {
         private readonly EcsCustomInject<Configuration> _config = default;
+        private readonly EcsCustomInject<SceneData> _sceneData = default;
         public void Init(IEcsSystems systems)
         {
             for (int y = 0; y < _config.Value.GridHeight; y+=3)
@@ -18,11 +19,9 @@ namespace EcsSudoku.Systems
                     var positionX = x * (1 + _config.Value.Offset.x);
                     var positionY = y * (1 + _config.Value.Offset.y);
                     Object.Instantiate(_config.Value.CellAreaPrefab, new Vector3(positionX, positionY),
-                        quaternion.identity);
+                        quaternion.identity, _sceneData.Value.Table);
                 }
-                
             }
-            
         }
     }
 }
