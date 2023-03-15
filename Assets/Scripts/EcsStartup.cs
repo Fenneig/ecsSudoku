@@ -25,6 +25,7 @@ namespace EcsSudoku
                 .Add(new InitFieldSystem())
                 .Add(new InitCellViewSystem())
                 .Add(new InitAreaSystem())
+                .Add(new InitFieldNumbers())
                 .Add(new UpdateCameraSystem())
 
                 // register additional worlds here, for example:
