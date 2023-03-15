@@ -23,7 +23,9 @@ namespace EcsSudoku
                 // .Add (new TestSystem1 ())
                 // .Add (new TestSystem2 ())
                 .Add(new InitFieldSystem())
-                .Add(new CreateCellViewSystem())
+                .Add(new InitCellViewSystem())
+                .Add(new InitAreaSystem())
+                .Add(new UpdateCameraSystem())
 
                 // register additional worlds here, for example:
                 // .AddWorld (new EcsWorld (), "events")

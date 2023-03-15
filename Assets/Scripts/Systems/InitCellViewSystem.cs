@@ -6,13 +6,13 @@ using UnityEngine;
 
 namespace EcsSudoku.Systems
 {
-    public class CreateCellViewSystem : IEcsRunSystem
+    public class InitCellViewSystem : IEcsInitSystem
     {
         private EcsFilterInject<Inc<Cell, Position>, Exc<CellViewRef>> _filter = default;
         private EcsCustomInject<Configuration> _config = default;
         private EcsPoolInject<CellViewRef> _cellViewRefPool = default;
 
-        public void Run(IEcsSystems systems)
+        public void Init(IEcsSystems systems)
         {
             foreach (var entity in _filter.Value)
             {
