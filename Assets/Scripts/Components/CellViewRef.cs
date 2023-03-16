@@ -1,5 +1,4 @@
-﻿using EcsSudoku.Systems;
-using EcsSudoku.Views;
+﻿using EcsSudoku.Views;
 
 namespace EcsSudoku.Components
 {

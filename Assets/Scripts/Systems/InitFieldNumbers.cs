@@ -14,8 +14,6 @@ namespace EcsSudoku.Systems
         private readonly EcsPoolInject<Number> _numberPool = default;
         private readonly EcsPoolInject<CellViewRef> _cellViewPool = default;
 
-        private int _areaSize = 3;
-
         public void Init(IEcsSystems systems)
         {
             int[,] field = new int[_config.Value.GridHeight, _config.Value.GridWidth];
@@ -31,7 +29,8 @@ namespace EcsSudoku.Systems
             {
                 for (int x = 0; x < _config.Value.GridWidth; x++)
                 {
-                    var value = (y * _areaSize + y / _areaSize + x) % (_areaSize * _areaSize) + 1;
+                    var value = (y * _config.Value.AreaSize + y / _config.Value.AreaSize + x) %
+                                   (_config.Value.AreaSize * _config.Value.AreaSize) + 1;
 
                     _numberPool.Value.Add(field[y, x]).Value = value;
                     
@@ -80,16 +79,16 @@ namespace EcsSudoku.Systems
 
         private void SwapRowsSmall(int[,] table)
         {
-            int area = Random.Range(0, _areaSize);
-            int line1 = Random.Range(0, _areaSize);
+            int area = Random.Range(0, _config.Value.AreaSize);
+            int line1 = Random.Range(0, _config.Value.AreaSize);
 
-            int n1 = area * _areaSize + line1;
+            int n1 = area * _config.Value.AreaSize + line1;
 
             int line2;
-            do line2 = Random.Range(0, _areaSize);
+            do line2 = Random.Range(0, _config.Value.AreaSize);
             while (line1 == line2);
 
-            int n2 = area * _areaSize + line2;
+            int n2 = area * _config.Value.AreaSize + line2;
 
             for (int i = 0; i < _config.Value.GridWidth; i++)
                 (table[n1, i], table[n2, i]) = (table[n2, i], table[n1, i]);
@@ -104,16 +103,16 @@ namespace EcsSudoku.Systems
 
         private void SwapRowsArea(int[,] table)
         {
-            int area1 = Random.Range(0, _areaSize);
+            int area1 = Random.Range(0, _config.Value.AreaSize);
 
             int area2;
-            do area2 = Random.Range(0, _areaSize);
+            do area2 = Random.Range(0, _config.Value.AreaSize);
             while (area1 == area2);
 
-            for (int i = 0; i < _areaSize; i++)
+            for (int i = 0; i < _config.Value.AreaSize; i++)
             {
-                int n1 = area1 * _areaSize + i;
-                int n2 = area2 * _areaSize + i;
+                int n1 = area1 * _config.Value.AreaSize + i;
+                int n2 = area2 * _config.Value.AreaSize + i;
 
                 for (int j = 0; j < _config.Value.GridWidth; j++)
                 {

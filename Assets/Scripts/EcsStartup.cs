@@ -17,6 +17,7 @@ namespace EcsSudoku
         void Start()
         {
             _world = new EcsWorld();
+            _sceneData.EventsBus = new EventsBus();
             _systems = new EcsSystems(_world);
             _systems
                 // register your systems here, for example:
@@ -27,6 +28,9 @@ namespace EcsSudoku
                 .Add(new InitAreaSystem())
                 .Add(new InitFieldNumbers())
                 .Add(new UpdateCameraSystem())
+                .Add(new ControlSystem())
+                .Add(new ClickAnalyzeSystem())
+                .Add(new RecolorCellsSystem())
 
                 // register additional worlds here, for example:
                 // .AddWorld (new EcsWorld (), "events")

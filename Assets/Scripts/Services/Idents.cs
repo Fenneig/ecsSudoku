@@ -6,9 +6,9 @@ namespace EcsSudoku.Services
     {
         public static class Colors
         {
-            public static Color White = Color.white;
+            public static Color UnselectedCell = Color.white;
             public static Color SelectedCell = Color.gray;
-            public static Color SameAreaRowColumn = Color.cyan;
+            public static Color LinkedCell = Color.cyan;
         }
     }
 }

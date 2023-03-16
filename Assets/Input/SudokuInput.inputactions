@@ -1,0 +1,45 @@
+{
+    "name": "SudokuInput",
+    "maps": [
+        {
+            "name": "Sudoku",
+            "id": "9f7e0a44-f97a-4f23-85fe-6ae21a97ff37",
+            "actions": [
+                {
+                    "name": "Click",
+                    "type": "Button",
+                    "id": "d4587e52-bd3a-41d0-a856-7bcdbfae6fd5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "919b03fe-3381-4b54-981c-cdaadf2639d8",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cbf64e0a-e378-4f5f-85e2-08cd12fba1fb",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GridWidth: 9
   GridHeight: 9
+  AreaSize: 3
   CellViewPrefab: {fileID: 4289142860148584083, guid: f9a2f664042183d48ac7be3565e0c789, type: 3}
   CellAreaPrefab: {fileID: 2105376239619082306, guid: e19cfd001e6693a419577d987d8c1b57, type: 3}
   Offset: {x: 0.05, y: 0.05}

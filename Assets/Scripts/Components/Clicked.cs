@@ -1,4 +1,4 @@
 ﻿namespace EcsSudoku.Components
 {
-    public struct Cell { }
+    public struct Clicked { }
 }
