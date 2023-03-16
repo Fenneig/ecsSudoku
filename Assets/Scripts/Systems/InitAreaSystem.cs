@@ -19,7 +19,7 @@ namespace EcsSudoku.Systems
                     var positionX = x * (1 + _config.Value.Offset.x);
                     var positionY = y * (1 + _config.Value.Offset.y);
                     Object.Instantiate(_config.Value.CellAreaPrefab, new Vector3(positionX, positionY),
-                        quaternion.identity, _sceneData.Value.Table);
+                        quaternion.identity, _sceneData.Value.FieldTransform);
                 }
             }
         }

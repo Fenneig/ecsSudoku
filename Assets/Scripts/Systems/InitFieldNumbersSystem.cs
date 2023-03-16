@@ -6,17 +6,19 @@ using UnityEngine;
 
 namespace EcsSudoku.Systems
 {
-    public class InitFieldNumbers : IEcsInitSystem
+    public class InitFieldNumbersSystem : IEcsInitSystem
     {
         private readonly EcsFilterInject<Inc<Cell, Position>> _filter = default;
-        private readonly EcsCustomInject<Configuration> _config = default;
 
         private readonly EcsPoolInject<Number> _numberPool = default;
-        private readonly EcsPoolInject<CellViewRef> _cellViewPool = default;
+        
+        private readonly EcsCustomInject<Configuration> _config = default;
+        private readonly EcsCustomInject<SceneData> _sceneData = default;
 
         public void Init(IEcsSystems systems)
         {
             int[,] field = new int[_config.Value.GridHeight, _config.Value.GridWidth];
+            _sceneData.Value.SolvedField = new int[_config.Value.GridHeight, _config.Value.GridWidth];
             foreach (var entity in _filter.Value)
             {
                 var entityPos = _filter.Pools.Inc2.Get(entity).Value;
@@ -31,10 +33,10 @@ namespace EcsSudoku.Systems
                 {
                     var value = (y * _config.Value.AreaSize + y / _config.Value.AreaSize + x) %
                                    (_config.Value.AreaSize * _config.Value.AreaSize) + 1;
-
-                    _numberPool.Value.Add(field[y, x]).Value = value;
                     
-                    _cellViewPool.Value.Get(field[y, x]).Value.Number.text = value.ToString();
+                    _numberPool.Value.Add(field[y, x]).Value = value;
+
+                    _sceneData.Value.SolvedField[y, x] = value;
                 }
             }
         }

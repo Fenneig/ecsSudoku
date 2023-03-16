@@ -29,8 +29,7 @@ namespace EcsSudoku.Systems
         {
             if (!context.canceled) return;
             
-            var camera = _sceneData.Value.Camera;
-            var ray = camera.ScreenPointToRay(Input.mousePosition);
+            var ray = _sceneData.Value.Camera.ScreenPointToRay(Input.mousePosition);
             
             if (!Physics.Raycast(ray, out var hitInfo)) return;
             

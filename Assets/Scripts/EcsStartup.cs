@@ -26,11 +26,13 @@ namespace EcsSudoku
                 .Add(new InitFieldSystem())
                 .Add(new InitCellViewSystem())
                 .Add(new InitAreaSystem())
-                .Add(new InitFieldNumbers())
+                .Add(new InitFieldNumbersSystem())
+                .Add(new InitEraseExtraFieldNumbersSystem())
                 .Add(new UpdateCameraSystem())
                 .Add(new ControlSystem())
                 .Add(new ClickAnalyzeSystem())
                 .Add(new RecolorCellsSystem())
+                .Add(new FillFieldWithNumbersSystem())
 
                 // register additional worlds here, for example:
                 // .AddWorld (new EcsWorld (), "events")

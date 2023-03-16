@@ -6,7 +6,8 @@ namespace EcsSudoku.Services
     {
         public Transform CameraTransform;
         public Camera Camera;
-        public Transform Table;
+        public Transform FieldTransform;
         public EventsBus EventsBus;
+        public int[,] SolvedField;
     }
 }
