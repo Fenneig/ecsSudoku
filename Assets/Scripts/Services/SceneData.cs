@@ -9,5 +9,6 @@ namespace EcsSudoku.Services
         public Transform FieldTransform;
         public EventsBus EventsBus;
         public int[,] SolvedField;
+        public int Difficult = 30;
     }
 }

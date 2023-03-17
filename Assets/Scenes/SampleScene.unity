@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 98253529}
   m_Layer: 0
-  m_Name: Table
+  m_Name: Field
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -269,7 +269,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CameraTransform: {fileID: 519420032}
   Camera: {fileID: 519420031}
-  Table: {fileID: 98253529}
+  FieldTransform: {fileID: 98253529}
+  Difficult: 30
 --- !u!4 &798561765
 Transform:
   m_ObjectHideFlags: 0
