@@ -2,6 +2,7 @@ using EcsSudoku.Services;
 using EcsSudoku.Systems;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
+using Leopotam.EcsLite.Unity.Ugui;
 using UnityEngine;
 
 namespace EcsSudoku
@@ -10,6 +11,7 @@ namespace EcsSudoku
     {
         [SerializeField] private SceneData _sceneData;
         [SerializeField] private Configuration _config;
+        [SerializeField] private EcsUguiEmitter _emitter;
 
         EcsWorld _world;
         IEcsSystems _systems;
@@ -33,6 +35,8 @@ namespace EcsSudoku
                 .Add(new ClickAnalyzeSystem())
                 .Add(new RecolorCellsSystem())
                 .Add(new FillFieldWithNumbersSystem())
+                .Add(new InitUINumberButtonsSystem())
+                .Add(new TestUguiClickEventSystem())
 
                 // register additional worlds here, for example:
                 // .AddWorld (new EcsWorld (), "events")
@@ -42,6 +46,7 @@ namespace EcsSudoku
                 .Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem())
 #endif
                 .Inject(_sceneData, _config)
+                .InjectUgui(_emitter)
                 .Init();
         }
 

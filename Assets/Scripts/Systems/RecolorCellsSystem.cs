@@ -16,7 +16,6 @@ namespace EcsSudoku.Systems
 
         private EventsBus _events;
 
-
         public void Init(IEcsSystems systems)
         {
             _events = _sceneData.Value.EventsBus;
@@ -24,19 +23,18 @@ namespace EcsSudoku.Systems
 
         public void Run(IEcsSystems systems)
         {
-            if (_events.HasEventSingleton<CellClickedEvent>())
+            if (!_events.HasEventSingleton<CellClickedEvent>()) return;
+            
+            foreach (var entity in _cellViewsFilter.Value)
             {
-                foreach (var entity in _cellViewsFilter.Value)
-                {
-                    ref var cellView = ref _cellViewsFilter.Pools.Inc1.Get(entity).Value;
-                    cellView.Background.color = Idents.Colors.UnselectedCell;
+                ref var cellView = ref _cellViewsFilter.Pools.Inc1.Get(entity).Value;
+                cellView.Background.color = Idents.Colors.UnselectedCell;
 
-                    if (_linkedCellsPool.Value.Has(entity))
-                        cellView.Background.color = Idents.Colors.LinkedCell;
+                if (_linkedCellsPool.Value.Has(entity))
+                    cellView.Background.color = Idents.Colors.LinkedCell;
                     
-                    if (_clickedPool.Value.Has(entity))
-                        cellView.Background.color = Idents.Colors.SelectedCell;
-                }
+                if (_clickedPool.Value.Has(entity))
+                    cellView.Background.color = Idents.Colors.SelectedCell;
             }
         }
     }

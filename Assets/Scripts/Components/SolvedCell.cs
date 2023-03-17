@@ -1,6 +1,4 @@
 ﻿namespace EcsSudoku.Components
 {
-    public struct SolvedCell
-    {
-    }
+    public struct SolvedCell { }
 }

@@ -11,6 +11,7 @@ namespace EcsSudoku.Services
         public int AreaSize;
         public CellView CellViewPrefab;
         public GameObject CellAreaPrefab;
+        public GameObject NumberButtonPrefab;
         public Vector2 Offset;
     }
 }
