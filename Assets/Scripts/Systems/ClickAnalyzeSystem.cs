@@ -10,13 +10,11 @@ namespace EcsSudoku.Systems
         private readonly EcsFilterInject<Inc<CellViewRef, Position>> _cellViewFilter = default;
         private readonly EcsFilterInject<Inc<LinkedCell>> _linkedCellsFilter = default;
         private readonly EcsFilterInject<Inc<Clicked>> _clickedFilter = default;
-
+        private readonly EcsFilterInject<Inc<CellClickedEvent>> _cellClickedEventFilter = default;
+        
         private readonly EcsCustomInject<Configuration> _config = default;
-        private readonly EcsCustomInject<SceneData> _sceneData = default;
-
+        
         private int[,] _field;
-        private EventsBus _events;
-
 
         public void Init(IEcsSystems systems)
         {
@@ -26,28 +24,28 @@ namespace EcsSudoku.Systems
                 ref var position = ref _cellViewFilter.Pools.Inc2.Get(entity).Value;
                 _field[position.Y, position.X] = entity;
             }
-
-            _events = _sceneData.Value.EventsBus;
         }
 
         public void Run(IEcsSystems systems)
         {
-            if (!_events.HasEventSingleton<CellClickedEvent>(out var clickedEvent)) return;
-
-
-            foreach (var entity in _linkedCellsFilter.Value)
+            foreach (var clickedEventEntity in _cellClickedEventFilter.Value)
             {
-                _linkedCellsFilter.Pools.Inc1.Del(entity);
-            }
+                var clickedCellPosition = _cellClickedEventFilter.Pools.Inc1.Get(clickedEventEntity).CellPosition;
+                
+                foreach (var entity in _linkedCellsFilter.Value)
+                {
+                    _linkedCellsFilter.Pools.Inc1.Del(entity);
+                }
 
-            foreach (var entity in _clickedFilter.Value)
-            {
-                _clickedFilter.Pools.Inc1.Del(entity);
-            }
+                foreach (var entity in _clickedFilter.Value)
+                {
+                    _clickedFilter.Pools.Inc1.Del(entity);
+                }
 
-            MarkLinkedCells(clickedEvent.CellPosition);
+                MarkLinkedCells(clickedCellPosition);
             
-            _clickedFilter.Pools.Inc1.Add(_field[clickedEvent.CellPosition.Y, clickedEvent.CellPosition.X]);
+                _clickedFilter.Pools.Inc1.Add(_field[clickedCellPosition.Y, clickedCellPosition.X]);
+            }
         }
 
         private void MarkLinkedCells(Int2 position)

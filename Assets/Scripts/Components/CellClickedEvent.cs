@@ -2,7 +2,7 @@
 
 namespace EcsSudoku.Components
 {
-    public struct CellClickedEvent : IEventSingleton
+    public struct CellClickedEvent
     {
         public Int2 CellPosition;
     }

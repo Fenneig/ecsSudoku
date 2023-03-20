@@ -20,7 +20,6 @@ namespace EcsSudoku
         void Start()
         {
             _world = new EcsWorld();
-            _sceneData.EventsBus = new EventsBus();
             _systems = new EcsSystems(_world);
             _systems
                 // register your systems here, for example:

@@ -5,28 +5,16 @@ using Leopotam.EcsLite.Di;
 
 namespace EcsSudoku.Systems
 {
-    public class RecolorCellsSystem : IEcsInitSystem, IEcsRunSystem
+    public class RecolorCellsSystem : IEcsRunSystem
     {
         private readonly EcsFilterInject<Inc<CellViewRef>> _cellViewsFilter = default;
-
+        private readonly EcsFilterInject<Inc<SameNumberAsSelected>, Exc<Clicked>> _sameNumberAsSelectedFilter = default;
 
         private readonly EcsPoolInject<Clicked> _clickedPool = default;
         private readonly EcsPoolInject<LinkedCell> _linkedCellsPool = default;
-        private readonly EcsPoolInject<SameNumberAsSelected> _sameNumberAsSelectedPool = default;
-
-        private readonly EcsCustomInject<SceneData> _sceneData = default;
-
-        private EventsBus _events;
-
-        public void Init(IEcsSystems systems)
-        {
-            _events = _sceneData.Value.EventsBus;
-        }
 
         public void Run(IEcsSystems systems)
         {
-            if (!_events.HasEventSingleton<CellClickedEvent>()) return;
-            
             foreach (var entity in _cellViewsFilter.Value)
             {
                 ref var cellView = ref _cellViewsFilter.Pools.Inc1.Get(entity).Value;
@@ -34,12 +22,12 @@ namespace EcsSudoku.Systems
 
                 if (_linkedCellsPool.Value.Has(entity))
                     cellView.Background.color = Idents.Colors.LinkedCell;
-                    
+
+                if (_sameNumberAsSelectedFilter.Pools.Inc1.Has(entity))
+                    cellView.Background.color = Idents.Colors.LinkedCell;
+
                 if (_clickedPool.Value.Has(entity))
                     cellView.Background.color = Idents.Colors.SelectedCell;
-                
-                if (_sameNumberAsSelectedPool.Value.Has(entity))
-                    cellView.Background.color = Idents.Colors.LinkedCell;
             }
         }
     }
