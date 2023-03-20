@@ -11,8 +11,6 @@ namespace EcsSudoku.Systems
     public class ControlSystem : IEcsInitSystem, SudokuInput.ISudokuActions
     {
         private readonly EcsFilterInject<Inc<Clicked>> _clickedFilter = default;
-        private readonly EcsFilterInject<Inc<CellClickedEvent>> _cellClickedEventFilter = default;
-
         
         private readonly EcsCustomInject<SceneData> _sceneData = default;
         
@@ -40,10 +38,7 @@ namespace EcsSudoku.Systems
             foreach (var entity in _clickedFilter.Value)
                 _clickedFilter.Pools.Inc1.Del(entity);
             
-            foreach (var entity in _cellClickedEventFilter.Value)
-                _cellClickedEventFilter.Pools.Inc1.Del(entity);
-            
-            _cellClickedEventFilter.Pools.Inc1.Add(cellView.Entity).CellPosition =
+            _clickedFilter.Pools.Inc1.Add(cellView.Entity).CellPosition =
                 _positionPool.Value.Get(cellView.Entity).Value;
         }
     }

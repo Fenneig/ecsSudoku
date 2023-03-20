@@ -1,4 +1,9 @@
-﻿namespace EcsSudoku.Components
+﻿using EcsSudoku.Services;
+
+namespace EcsSudoku.Components
 {
-    public struct Clicked { }
+    public struct Clicked
+    {
+        public Int2 CellPosition;
+    }
 }

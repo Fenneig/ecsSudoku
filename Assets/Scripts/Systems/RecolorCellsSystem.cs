@@ -8,10 +8,10 @@ namespace EcsSudoku.Systems
     public class RecolorCellsSystem : IEcsRunSystem
     {
         private readonly EcsFilterInject<Inc<CellViewRef>> _cellViewsFilter = default;
-        private readonly EcsFilterInject<Inc<SameNumberAsSelected>, Exc<Clicked>> _sameNumberAsSelectedFilter = default;
-
+        
         private readonly EcsPoolInject<Clicked> _clickedPool = default;
         private readonly EcsPoolInject<LinkedCell> _linkedCellsPool = default;
+        private readonly EcsPoolInject<SameNumberAsSelected> _sameNumberAsSelectedPool = default;
 
         public void Run(IEcsSystems systems)
         {
@@ -23,7 +23,7 @@ namespace EcsSudoku.Systems
                 if (_linkedCellsPool.Value.Has(entity))
                     cellView.Background.color = Idents.Colors.LinkedCell;
 
-                if (_sameNumberAsSelectedFilter.Pools.Inc1.Has(entity))
+                if (_sameNumberAsSelectedPool.Value.Has(entity))
                     cellView.Background.color = Idents.Colors.LinkedCell;
 
                 if (_clickedPool.Value.Has(entity))

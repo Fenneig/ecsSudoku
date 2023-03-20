@@ -10,7 +10,6 @@ namespace EcsSudoku.Systems
         private readonly EcsFilterInject<Inc<CellViewRef, Position>> _cellViewFilter = default;
         private readonly EcsFilterInject<Inc<LinkedCell>> _linkedCellsFilter = default;
         private readonly EcsFilterInject<Inc<Clicked>> _clickedFilter = default;
-        private readonly EcsFilterInject<Inc<CellClickedEvent>> _cellClickedEventFilter = default;
         
         private readonly EcsCustomInject<Configuration> _config = default;
         
@@ -28,23 +27,14 @@ namespace EcsSudoku.Systems
 
         public void Run(IEcsSystems systems)
         {
-            foreach (var clickedEventEntity in _cellClickedEventFilter.Value)
+            foreach (var clickedEventEntity in _clickedFilter.Value)
             {
-                var clickedCellPosition = _cellClickedEventFilter.Pools.Inc1.Get(clickedEventEntity).CellPosition;
+                var clickedCellPosition = _clickedFilter.Pools.Inc1.Get(clickedEventEntity).CellPosition;
                 
                 foreach (var entity in _linkedCellsFilter.Value)
-                {
                     _linkedCellsFilter.Pools.Inc1.Del(entity);
-                }
-
-                foreach (var entity in _clickedFilter.Value)
-                {
-                    _clickedFilter.Pools.Inc1.Del(entity);
-                }
 
                 MarkLinkedCells(clickedCellPosition);
-            
-                _clickedFilter.Pools.Inc1.Add(_field[clickedCellPosition.Y, clickedCellPosition.X]);
             }
         }
 
