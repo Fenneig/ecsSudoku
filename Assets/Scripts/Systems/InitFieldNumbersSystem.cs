@@ -11,32 +11,42 @@ namespace EcsSudoku.Systems
         private readonly EcsFilterInject<Inc<Cell, Position>> _filter = default;
 
         private readonly EcsPoolInject<Number> _numberPool = default;
-        
+
         private readonly EcsCustomInject<Configuration> _config = default;
         private readonly EcsCustomInject<SceneData> _sceneData = default;
 
         public void Init(IEcsSystems systems)
         {
-            int[,] field = new int[_config.Value.GridHeight, _config.Value.GridWidth];
+            int[,] fieldEntities = new int[_config.Value.GridHeight, _config.Value.GridWidth];
+            int[,] fieldValues = new int[_config.Value.GridHeight, _config.Value.GridWidth];
             _sceneData.Value.SolvedField = new int[_config.Value.GridHeight, _config.Value.GridWidth];
+            
             foreach (var entity in _filter.Value)
             {
                 var entityPos = _filter.Pools.Inc2.Get(entity).Value;
-                field[entityPos.Y, entityPos.X] = entity;
+                fieldEntities[entityPos.Y, entityPos.X] = entity;
+                fieldValues[entityPos.Y, entityPos.X] = 0;
             }
-
-            RandomizeField(30, field);
 
             for (int y = 0; y < _config.Value.GridHeight; y++)
             {
                 for (int x = 0; x < _config.Value.GridWidth; x++)
                 {
                     var value = (y * _config.Value.AreaSize + y / _config.Value.AreaSize + x) %
-                                   (_config.Value.AreaSize * _config.Value.AreaSize) + 1;
-                    
-                    _numberPool.Value.Add(field[y, x]).Value = value;
+                        (_config.Value.AreaSize * _config.Value.AreaSize) + 1;
 
-                    _sceneData.Value.SolvedField[y, x] = value;
+                    fieldValues[y, x] = value;
+                }
+            }
+
+            RandomizeField(30, fieldValues);
+
+            for (int y = 0; y < _config.Value.GridHeight; y++)
+            {
+                for (int x = 0; x < _config.Value.GridWidth; x++)
+                {
+                    _numberPool.Value.Add(fieldEntities[y, x]).Value = fieldValues[y, x];
+                    _sceneData.Value.SolvedField[y, x] = fieldValues[y, x];
                 }
             }
         }
@@ -45,7 +55,6 @@ namespace EcsSudoku.Systems
         {
             for (int i = 0; i < operationsAmount; i++)
             {
-
                 var function = Random.Range(0, 5);
                 switch (function)
                 {
@@ -67,7 +76,7 @@ namespace EcsSudoku.Systems
                 }
             }
         }
-        
+
         private void TransposeField(int[,] table)
         {
             for (int i = 0; i < _config.Value.GridWidth; i++)

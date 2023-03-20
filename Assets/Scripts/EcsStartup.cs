@@ -1,5 +1,6 @@
 using EcsSudoku.Services;
 using EcsSudoku.Systems;
+using EcsSudoku.Systems.Debug;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using Leopotam.EcsLite.Unity.Ugui;
@@ -33,6 +34,7 @@ namespace EcsSudoku
                 .Add(new UpdateCameraSystem())
                 .Add(new ControlSystem())
                 .Add(new ClickAnalyzeSystem())
+                .Add(new MarkSameNumbersSystem())
                 .Add(new RecolorCellsSystem())
                 .Add(new FillFieldWithNumbersSystem())
                 .Add(new InitUINumberButtonsSystem())
@@ -44,6 +46,7 @@ namespace EcsSudoku
                 // add debug systems for custom worlds here, for example:
                 // .Add (new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem ("events"))
                 .Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem())
+                .Add(new FieldDebugSystem())
 #endif
                 .Inject(_sceneData, _config)
                 .InjectUgui(_emitter)

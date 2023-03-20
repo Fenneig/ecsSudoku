@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Background: {fileID: 8057729598426821337}
-  Number: {fileID: 1577590238684143938}
+  NumberText: {fileID: 1577590238684143938}
   Entity: 0
 --- !u!65 &6310041818349090462
 BoxCollider:

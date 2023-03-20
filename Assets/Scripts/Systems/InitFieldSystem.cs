@@ -25,7 +25,6 @@ namespace EcsSudoku.Systems
                     _positionPool.Value.Add(cellEntity).Value = new Int2(x, y);
                 }
             }
-            
         }
     }
 }

@@ -6,14 +6,14 @@ namespace EcsSudoku.Systems
 {
     public class FillFieldWithNumbersSystem : IEcsRunSystem
     {
-        private readonly EcsFilterInject<Inc<CellViewRef, Number>> _filter;
+        private readonly EcsFilterInject<Inc<CellViewRef, Number>> _filter = default;
         
         public void Run(IEcsSystems systems)
         {
             foreach (var entity in _filter.Value)
             {
                 var numberToFill = _filter.Pools.Inc2.Get(entity).Value;
-                _filter.Pools.Inc1.Get(entity).Value.Number.text = numberToFill == 0 ? "" : numberToFill.ToString();
+                _filter.Pools.Inc1.Get(entity).Value.NumberText.text = numberToFill == 0 ? "" : numberToFill.ToString();
             }
         }
     }

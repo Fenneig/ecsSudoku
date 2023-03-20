@@ -7,8 +7,8 @@ namespace EcsSudoku.Systems
 {
     public class UpdateCameraSystem : IEcsInitSystem
     {
-        private readonly EcsCustomInject<SceneData> _sceneData;
-        private readonly EcsCustomInject<Configuration> _config;
+        private readonly EcsCustomInject<SceneData> _sceneData = default;
+        private readonly EcsCustomInject<Configuration> _config = default;
 
         public void Init(IEcsSystems systems)
         {

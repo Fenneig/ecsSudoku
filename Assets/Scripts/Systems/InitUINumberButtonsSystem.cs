@@ -19,7 +19,7 @@ namespace EcsSudoku.Systems
             
             for (int i = 0; i < maxLineSize; i++)
             {
-                var numberButton = GameObject.Instantiate(_config.Value.NumberButtonPrefab, _sceneData.Value.NumberButtonsTransform);
+                var numberButton = Object.Instantiate(_config.Value.NumberButtonPrefab, _sceneData.Value.NumberButtonsTransform);
                 numberButton.GetComponent<NumberButtonView>().NumberText.text = (i + 1).ToString();
             }
         }

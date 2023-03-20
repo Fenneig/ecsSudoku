@@ -9,8 +9,10 @@ namespace EcsSudoku.Systems
     {
         private readonly EcsFilterInject<Inc<CellViewRef>> _cellViewsFilter = default;
 
+
         private readonly EcsPoolInject<Clicked> _clickedPool = default;
         private readonly EcsPoolInject<LinkedCell> _linkedCellsPool = default;
+        private readonly EcsPoolInject<SameNumberAsSelected> _sameNumberAsSelectedPool = default;
 
         private readonly EcsCustomInject<SceneData> _sceneData = default;
 
@@ -35,6 +37,9 @@ namespace EcsSudoku.Systems
                     
                 if (_clickedPool.Value.Has(entity))
                     cellView.Background.color = Idents.Colors.SelectedCell;
+                
+                if (_sameNumberAsSelectedPool.Value.Has(entity))
+                    cellView.Background.color = Idents.Colors.LinkedCell;
             }
         }
     }

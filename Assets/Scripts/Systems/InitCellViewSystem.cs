@@ -8,10 +8,11 @@ namespace EcsSudoku.Systems
 {
     public class InitCellViewSystem : IEcsInitSystem
     {
-        private EcsFilterInject<Inc<Cell, Position>, Exc<CellViewRef>> _filter = default;
-        private EcsCustomInject<Configuration> _config = default;
-        private EcsCustomInject<SceneData> _sceneData = default;
-        private EcsPoolInject<CellViewRef> _cellViewRefPool = default;
+        private readonly EcsFilterInject<Inc<Cell, Position>, Exc<CellViewRef>> _filter = default;
+        private readonly EcsPoolInject<CellViewRef> _cellViewRefPool = default;
+        
+        private readonly EcsCustomInject<Configuration> _config = default;
+        private readonly EcsCustomInject<SceneData> _sceneData = default;
 
         public void Init(IEcsSystems systems)
         {

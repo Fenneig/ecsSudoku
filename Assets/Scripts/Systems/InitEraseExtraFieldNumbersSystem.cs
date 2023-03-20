@@ -8,10 +8,12 @@ namespace EcsSudoku.Systems
 {
     public class InitEraseExtraFieldNumbersSystem : IEcsInitSystem
     {
-        private EcsCustomInject<SceneData> _sceneData = default;
-        private EcsCustomInject<Configuration> _config = default;
-        private EcsFilterInject<Inc<Number, Position>> _numberFilter = default;
-        private EcsPoolInject<SolvedCell> _solvedCellPool = default;
+        private readonly EcsFilterInject<Inc<Number, Position>> _numberFilter = default;
+        
+        private readonly EcsPoolInject<SolvedCell> _solvedCellPool = default;
+        
+        private readonly EcsCustomInject<SceneData> _sceneData = default;
+        private readonly EcsCustomInject<Configuration> _config = default;
 
         public void Init(IEcsSystems systems)
         {
