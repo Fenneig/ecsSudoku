@@ -12,6 +12,7 @@ namespace EcsSudoku.Systems
         private readonly EcsPoolInject<Clicked> _clickedPool = default;
         private readonly EcsPoolInject<LinkedCell> _linkedCellsPool = default;
         private readonly EcsPoolInject<SameNumberAsSelected> _sameNumberAsSelectedPool = default;
+        private readonly EcsPoolInject<MistakeCell> _mistakeCellsPool = default;
 
         public void Run(IEcsSystems systems)
         {
@@ -28,6 +29,9 @@ namespace EcsSudoku.Systems
 
                 if (_clickedPool.Value.Has(entity))
                     cellView.Background.color = Idents.Colors.SelectedCell;
+
+                if (_mistakeCellsPool.Value.Has(entity))
+                    cellView.Background.color = Idents.Colors.MistakeCell;
             }
         }
     }

@@ -32,12 +32,14 @@ namespace EcsSudoku
                 .Add(new InitEraseExtraFieldNumbersSystem())
                 .Add(new UpdateCameraSystem())
                 .Add(new ControlSystem())
-                .Add(new ClickAnalyzeSystem())
+                .Add(new AnalyzeClickSystem())
                 .Add(new MarkSameNumbersSystem())
                 .Add(new RecolorCellsSystem())
                 .Add(new FillFieldWithNumbersSystem())
                 .Add(new InitUINumberButtonsSystem())
                 .Add(new TestUguiClickEventSystem())
+                .Add(new AnalyzePlacedNumberSystem())
+                .Add(new MarkMistakeCellsSystem())
 
                 // register additional worlds here, for example:
                 // .AddWorld (new EcsWorld (), "events")

@@ -28,7 +28,6 @@ namespace EcsSudoku.Systems
                 if (_toSelectFilter.Pools.Inc1.Get(entity).Value == number && 
                     !_sameNumberAsSelectedPool.Value.Has(entity))
                 {
-                    
                     _sameNumberAsSelectedPool.Value.Add(entity);
                 }
             }

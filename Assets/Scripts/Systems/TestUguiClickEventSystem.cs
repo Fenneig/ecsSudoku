@@ -9,6 +9,7 @@ namespace EcsSudoku.Systems
     public class TestUguiClickEventSystem : EcsUguiCallbackSystem
     {
         private readonly EcsFilterInject<Inc<Clicked, Number>, Exc<SolvedCell>> _filter = default;
+        private readonly EcsPoolInject<PlacedNumber> _placedPool = default;
 
         [Preserve]
         [EcsUguiClickEvent("NumberButton")]
@@ -19,6 +20,9 @@ namespace EcsSudoku.Systems
             foreach (var entity in _filter.Value)
             {
                 _filter.Pools.Inc2.Get(entity).Value = number;
+                
+                if (!_placedPool.Value.Has(entity))
+                    _placedPool.Value.Add(entity);
             }
         }
     }

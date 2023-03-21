@@ -5,9 +5,9 @@ using Leopotam.EcsLite.Di;
 
 namespace EcsSudoku.Systems
 {
-    public class ClickAnalyzeSystem : IEcsInitSystem, IEcsRunSystem
+    public class AnalyzeClickSystem : IEcsInitSystem, IEcsRunSystem
     {
-        private readonly EcsFilterInject<Inc<CellViewRef, Position>> _cellViewFilter = default;
+        private readonly EcsFilterInject<Inc<Position>> _positionFilter = default;
         private readonly EcsFilterInject<Inc<LinkedCell>> _linkedCellsFilter = default;
         private readonly EcsFilterInject<Inc<Clicked>> _clickedFilter = default;
         
@@ -18,9 +18,9 @@ namespace EcsSudoku.Systems
         public void Init(IEcsSystems systems)
         {
             _field = new int[_config.Value.GridHeight, _config.Value.GridWidth];
-            foreach (var entity in _cellViewFilter.Value)
+            foreach (var entity in _positionFilter.Value)
             {
-                ref var position = ref _cellViewFilter.Pools.Inc2.Get(entity).Value;
+                ref var position = ref _positionFilter.Pools.Inc1.Get(entity).Value;
                 _field[position.Y, position.X] = entity;
             }
         }
