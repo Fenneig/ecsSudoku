@@ -13,8 +13,6 @@ namespace EcsSudoku.Systems
         private readonly EcsFilterInject<Inc<Clicked>> _clickedFilter = default;
         
         private readonly EcsCustomInject<SceneData> _sceneData = default;
-        
-        private readonly EcsPoolInject<Position> _positionPool = default;
 
         public void Init(IEcsSystems systems)
         {
@@ -37,9 +35,8 @@ namespace EcsSudoku.Systems
 
             foreach (var entity in _clickedFilter.Value)
                 _clickedFilter.Pools.Inc1.Del(entity);
-            
-            _clickedFilter.Pools.Inc1.Add(cellView.Entity).CellPosition =
-                _positionPool.Value.Get(cellView.Entity).Value;
+
+            _clickedFilter.Pools.Inc1.Add(cellView.Entity);
         }
     }
 }

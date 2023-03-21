@@ -9,7 +9,7 @@ namespace EcsSudoku.Systems
     {
         private readonly EcsFilterInject<Inc<Position>> _positionFilter = default;
         private readonly EcsFilterInject<Inc<LinkedCell>> _linkedCellsFilter = default;
-        private readonly EcsFilterInject<Inc<Clicked>> _clickedFilter = default;
+        private readonly EcsFilterInject<Inc<Clicked, Position>> _clickedFilter = default;
         
         private readonly EcsCustomInject<Configuration> _config = default;
         
@@ -29,7 +29,7 @@ namespace EcsSudoku.Systems
         {
             foreach (var clickedEventEntity in _clickedFilter.Value)
             {
-                var clickedCellPosition = _clickedFilter.Pools.Inc1.Get(clickedEventEntity).CellPosition;
+                var clickedCellPosition = _clickedFilter.Pools.Inc2.Get(clickedEventEntity).Value;
                 
                 foreach (var entity in _linkedCellsFilter.Value)
                     _linkedCellsFilter.Pools.Inc1.Del(entity);

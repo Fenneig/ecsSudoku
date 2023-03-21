@@ -1,6 +1,4 @@
 ﻿namespace EcsSudoku.Components
 {
-    public struct SameNumberAsSelected
-    {
-    }
+    public struct SameNumberAsSelected { }
 }
