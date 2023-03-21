@@ -40,6 +40,7 @@ namespace EcsSudoku
                 .Add(new TestUguiClickEventSystem())
                 .Add(new AnalyzePlacedNumberSystem())
                 .Add(new MarkMistakeCellsSystem())
+                .Add(new TimerSystem())
 
                 // register additional worlds here, for example:
                 // .AddWorld (new EcsWorld (), "events")

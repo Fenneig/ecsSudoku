@@ -1,3 +1,4 @@
+using EcsSudoku.Views;
 using UnityEngine;
 
 namespace EcsSudoku.Services
@@ -10,5 +11,6 @@ namespace EcsSudoku.Services
         public Transform NumberButtonsTransform;
         public int[,] SolvedField;
         public int Difficult = 30;
+        public TimerView TimerView;
     }
 }
