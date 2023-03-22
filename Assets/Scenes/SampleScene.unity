@@ -422,6 +422,7 @@ GameObject:
   - component: {fileID: 391584625}
   - component: {fileID: 391584627}
   - component: {fileID: 391584626}
+  - component: {fileID: 391584628}
   m_Layer: 5
   m_Name: Mistakes
   m_TagString: Untagged
@@ -546,6 +547,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 391584624}
   m_CullTransparentMesh: 1
+--- !u!114 &391584628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 391584624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5db73ac740f422785b3af685cba69e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Text: {fileID: 391584626}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -733,6 +747,7 @@ MonoBehaviour:
   NumberButtonsTransform: {fileID: 2110923020}
   Difficult: 22
   TimerView: {fileID: 833694262}
+  MistakeView: {fileID: 391584628}
 --- !u!4 &798561765
 Transform:
   m_ObjectHideFlags: 0
