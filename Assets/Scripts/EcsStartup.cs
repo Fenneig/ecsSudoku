@@ -37,13 +37,14 @@ namespace EcsSudoku
                 .Add(new RecolorCellsSystem())
                 .Add(new FillFieldWithNumbersSystem())
                 .Add(new InitUINumberButtonsSystem())
-                .Add(new TestUguiClickEventSystem())
+                .Add(new UguiClickEventSystem())
                 .Add(new AnalyzePlacedNumberSystem())
                 .Add(new MarkMistakeCellsSystem())
                 .Add(new TimerSystem())
 
                 // register additional worlds here, for example:
                 // .AddWorld (new EcsWorld (), "events")
+                .AddWorld(new EcsWorld(), Idents.Worlds.Events)
 #if UNITY_EDITOR
                 // add debug systems for custom worlds here, for example:
                 // .Add (new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem ("events"))

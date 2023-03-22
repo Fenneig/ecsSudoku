@@ -6,9 +6,10 @@ using UnityEngine.Scripting;
 
 namespace EcsSudoku.Systems
 {
-    public class TestUguiClickEventSystem : EcsUguiCallbackSystem
+    public class UguiClickEventSystem : EcsUguiCallbackSystem
     {
         private readonly EcsFilterInject<Inc<Clicked, Number>, Exc<SolvedCell>> _filter = default;
+        
         private readonly EcsPoolInject<PlacedNumber> _placedPool = default;
 
         [Preserve]

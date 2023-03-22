@@ -11,5 +11,10 @@ namespace EcsSudoku.Services
             public static Color LinkedCell = Color.cyan;
             public static Color MistakeCell = Color.red;
         }
+
+        public static class Worlds
+        {
+            public static string Events = "Events";
+        }
     }
 }
