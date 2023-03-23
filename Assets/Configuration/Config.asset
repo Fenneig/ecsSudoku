@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5262688b12a2b3a4a849beed98f1f66f, type: 3}
   m_Name: Config
   m_EditorClassIdentifier: 
-  GridWidth: 9
-  GridHeight: 9
+  GridSize: 9
   AreaSize: 3
+  Offset: 0.04
   CellViewPrefab: {fileID: 4289142860148584083, guid: f9a2f664042183d48ac7be3565e0c789, type: 3}
   CellAreaPrefab: {fileID: 2105376239619082306, guid: e19cfd001e6693a419577d987d8c1b57, type: 3}
   NumberButtonPrefab: {fileID: 3139806218849174815, guid: 3f366977eb6c97c41872b93fbb74f41e, type: 3}
-  Offset: {x: 0.05, y: 0.05}

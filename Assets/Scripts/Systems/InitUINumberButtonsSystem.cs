@@ -13,14 +13,12 @@ namespace EcsSudoku.Systems
         
         public void Init(IEcsSystems systems)
         {
-            var maxLineSize = _config.Value.GridWidth > _config.Value.GridHeight
-                ? _config.Value.GridWidth
-                : _config.Value.GridHeight;
-            
-            for (int i = 0; i < maxLineSize; i++)
+            _sceneData.Value.NumberButtons = new GameObject[_config.Value.GridSize];
+            for (int i = 0; i <  _config.Value.GridSize; i++)
             {
                 var numberButton = Object.Instantiate(_config.Value.NumberButtonPrefab, _sceneData.Value.NumberButtonsTransform);
                 numberButton.GetComponent<NumberButtonView>().NumberText.text = (i + 1).ToString();
+                _sceneData.Value.NumberButtons[i] = numberButton;
             }
         }
     }

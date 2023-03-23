@@ -16,9 +16,9 @@ namespace EcsSudoku.Systems
         {
             var world = _cellPool.Value.GetWorld();
             
-            for (int y = 0; y < _config.Value.GridHeight; y++)
+            for (int y = 0; y < _config.Value.GridSize; y++)
             {
-                for (int x = 0; x < _config.Value.GridWidth; x++)
+                for (int x = 0; x < _config.Value.GridSize; x++)
                 {
                     var cellEntity = world.NewEntity();
                     _cellPool.Value.Add(cellEntity);

@@ -10,12 +10,12 @@ namespace EcsSudoku.Systems.Debug
         private readonly EcsCustomInject<SceneData> _sceneData = default;
         public void Init(IEcsSystems systems)
         {
-            for (int i = 0; i < _config.Value.GridHeight; i++)
+            for (int i = 0; i < _config.Value.GridSize; i++)
             {
                 string result = "";
-                for (int j = 0; j < _config.Value.GridWidth; j++)
+                for (int j = 0; j < _config.Value.GridSize; j++)
                 {
-                    result += $"{_sceneData.Value.SolvedField[_config.Value.GridHeight - i - 1, j]}, ";
+                    result += $"{_sceneData.Value.SolvedField[_config.Value.GridSize - i - 1, j]}, ";
                 }
 
                 UnityEngine.Debug.Log(result);

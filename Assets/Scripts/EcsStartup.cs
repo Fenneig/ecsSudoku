@@ -44,12 +44,12 @@ namespace EcsSudoku
 
                 .Add(new UguiClickEventSystem())
                 .Add(new AnalyzePlacedNumberSystem())
+                .Add(new UguiButtonsSwitchSystem())
                 .DelHere<CellClickedEvent>(Idents.Worlds.Events)
                 
                 .Add(new MarkMistakeCellsSystem())
                 
                 .Add(new TimerSystem())
-                .Add(new UguiButtonsSwitchSystem())
                 .Add(new GameOverSystem())
                 
 #if UNITY_EDITOR

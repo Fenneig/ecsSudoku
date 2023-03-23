@@ -22,8 +22,8 @@ namespace EcsSudoku.Systems
 
                 var cellView = Object.Instantiate(_config.Value.CellViewPrefab, _sceneData.Value.FieldTransform);
 
-                cellView.transform.position = new Vector3(position.Value.X + _config.Value.Offset.x * position.Value.X,
-                                                          position.Value.Y + _config.Value.Offset.y * position.Value.Y);
+                cellView.transform.position = new Vector3(position.Value.X + _config.Value.Offset * position.Value.X,
+                                                          position.Value.Y + _config.Value.Offset * position.Value.Y);
                 
                 cellView.Entity = entity;
                 _cellViewRefPool.Value.Add(entity).Value = cellView;

@@ -17,7 +17,7 @@ namespace EcsSudoku.Systems
 
         public void Init(IEcsSystems systems)
         {
-            _field = new int[_config.Value.GridHeight, _config.Value.GridWidth];
+            _field = new int[_config.Value.GridSize, _config.Value.GridSize];
             foreach (var entity in _positionFilter.Value)
             {
                 ref var position = ref _positionFilter.Pools.Inc1.Get(entity).Value;
@@ -40,14 +40,14 @@ namespace EcsSudoku.Systems
 
         private void MarkLinkedCells(Int2 position)
         {
-            for (int y = 0; y < _config.Value.GridHeight; y++)
+            for (int y = 0; y < _config.Value.GridSize; y++)
             {
                 if (_linkedCellsFilter.Pools.Inc1.Has(_field[y, position.X])) continue;
                 
                 _linkedCellsFilter.Pools.Inc1.Add(_field[y, position.X]);
             }
 
-            for (int x = 0; x < _config.Value.GridWidth; x++)
+            for (int x = 0; x < _config.Value.GridSize; x++)
             {
                 if (_linkedCellsFilter.Pools.Inc1.Has(_field[position.Y, x])) continue;
                 

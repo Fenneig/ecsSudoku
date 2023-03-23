@@ -19,7 +19,7 @@ namespace EcsSudoku.Systems
 
         public void Init(IEcsSystems systems)
         {
-            _field = new int[_config.Value.GridHeight, _config.Value.GridWidth];
+            _field = new int[_config.Value.GridSize, _config.Value.GridSize];
             foreach (var entity in _positionFilter.Value)
             {
                 ref var position = ref _positionFilter.Pools.Inc1.Get(entity).Value;
@@ -44,7 +44,7 @@ namespace EcsSudoku.Systems
 
         private void MarkLinkedCellsAsMistakes(Int2 position, int number)
         {
-            for (int y = 0; y < _config.Value.GridHeight; y++)
+            for (int y = 0; y < _config.Value.GridSize; y++)
             {
                 if (_mistakeCellsFilter.Pools.Inc2.Get(_field[y, position.X]).Value != number) continue;
                 if (_mistakeCellsFilter.Pools.Inc1.Has(_field[y, position.X])) continue;
@@ -52,7 +52,7 @@ namespace EcsSudoku.Systems
                 _mistakeCellsFilter.Pools.Inc1.Add(_field[y, position.X]);
             }
 
-            for (int x = 0; x < _config.Value.GridWidth; x++)
+            for (int x = 0; x < _config.Value.GridSize; x++)
             {
                 if (_mistakeCellsFilter.Pools.Inc2.Get(_field[position.Y, x]).Value != number) continue;
                 if (_mistakeCellsFilter.Pools.Inc1.Has(_field[position.Y, x])) continue;

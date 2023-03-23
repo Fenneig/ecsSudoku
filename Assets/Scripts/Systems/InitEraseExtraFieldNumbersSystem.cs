@@ -17,7 +17,7 @@ namespace EcsSudoku.Systems
 
         public void Init(IEcsSystems systems)
         {
-            int[,] field = new int[_config.Value.GridHeight, _config.Value.GridWidth];
+            int[,] field = new int[_config.Value.GridSize, _config.Value.GridSize];
             
             foreach (var entity in _numberFilter.Value)
             {
@@ -25,13 +25,13 @@ namespace EcsSudoku.Systems
                 field[position.Y, position.X] = _numberFilter.Pools.Inc1.Get(entity).Value;
             }
 
-            int count = _config.Value.GridHeight * _config.Value.GridWidth - _sceneData.Value.Difficult;
+            int count = _config.Value.GridSize * _config.Value.GridSize - _sceneData.Value.Difficult;
 
             while (count != 0)
             {
-                int cellId = Random.Range(0, _config.Value.GridHeight * _config.Value.GridWidth);
-                int y = cellId / _config.Value.GridHeight;
-                int x = cellId % _config.Value.GridWidth;
+                int cellId = Random.Range(0, _config.Value.GridSize * _config.Value.GridSize);
+                int y = cellId / _config.Value.GridSize;
+                int x = cellId % _config.Value.GridSize;
                 if (field[y, x] != 0)
                 {
                     count--;

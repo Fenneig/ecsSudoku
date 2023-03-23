@@ -17,9 +17,9 @@ namespace EcsSudoku.Systems
 
         public void Init(IEcsSystems systems)
         {
-            int[,] fieldEntities = new int[_config.Value.GridHeight, _config.Value.GridWidth];
-            int[,] fieldValues = new int[_config.Value.GridHeight, _config.Value.GridWidth];
-            _sceneData.Value.SolvedField = new int[_config.Value.GridHeight, _config.Value.GridWidth];
+            int[,] fieldEntities = new int[_config.Value.GridSize, _config.Value.GridSize];
+            int[,] fieldValues = new int[_config.Value.GridSize, _config.Value.GridSize];
+            _sceneData.Value.SolvedField = new int[_config.Value.GridSize, _config.Value.GridSize];
             
             foreach (var entity in _filter.Value)
             {
@@ -28,9 +28,9 @@ namespace EcsSudoku.Systems
                 fieldValues[entityPos.Y, entityPos.X] = 0;
             }
 
-            for (int y = 0; y < _config.Value.GridHeight; y++)
+            for (int y = 0; y < _config.Value.GridSize; y++)
             {
-                for (int x = 0; x < _config.Value.GridWidth; x++)
+                for (int x = 0; x < _config.Value.GridSize; x++)
                 {
                     var value = (y * _config.Value.AreaSize + y / _config.Value.AreaSize + x) %
                         (_config.Value.AreaSize * _config.Value.AreaSize) + 1;
@@ -41,9 +41,9 @@ namespace EcsSudoku.Systems
 
             RandomizeField(30, fieldValues);
 
-            for (int y = 0; y < _config.Value.GridHeight; y++)
+            for (int y = 0; y < _config.Value.GridSize; y++)
             {
-                for (int x = 0; x < _config.Value.GridWidth; x++)
+                for (int x = 0; x < _config.Value.GridSize; x++)
                 {
                     _numberPool.Value.Add(fieldEntities[y, x]).Value = fieldValues[y, x];
                     _sceneData.Value.SolvedField[y, x] = fieldValues[y, x];
@@ -79,9 +79,9 @@ namespace EcsSudoku.Systems
 
         private void TransposeField(int[,] table)
         {
-            for (int i = 0; i < _config.Value.GridWidth; i++)
+            for (int i = 0; i < _config.Value.GridSize; i++)
             {
-                for (int j = i; j < _config.Value.GridHeight; j++)
+                for (int j = i; j < _config.Value.GridSize; j++)
                 {
                     (table[i, j], table[j, i]) = (table[j, i], table[i, j]);
                 }
@@ -101,7 +101,7 @@ namespace EcsSudoku.Systems
 
             int n2 = area * _config.Value.AreaSize + line2;
 
-            for (int i = 0; i < _config.Value.GridWidth; i++)
+            for (int i = 0; i < _config.Value.GridSize; i++)
                 (table[n1, i], table[n2, i]) = (table[n2, i], table[n1, i]);
         }
 
@@ -125,7 +125,7 @@ namespace EcsSudoku.Systems
                 int n1 = area1 * _config.Value.AreaSize + i;
                 int n2 = area2 * _config.Value.AreaSize + i;
 
-                for (int j = 0; j < _config.Value.GridWidth; j++)
+                for (int j = 0; j < _config.Value.GridSize; j++)
                 {
                     (table[n1, j], table[n2, j]) = (table[n2, j], table[n1, j]);
                 }

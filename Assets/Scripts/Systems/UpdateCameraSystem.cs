@@ -12,18 +12,16 @@ namespace EcsSudoku.Systems
 
         public void Init(IEcsSystems systems)
         {
-            var height = _config.Value.GridHeight;
-            var width = _config.Value.GridWidth;
+            var gridSize = _config.Value.GridSize;
             var camera = _sceneData.Value.Camera;
             camera.orthographic = true;
-            var orthographicSizeHeight = (height + (height - 1) * _config.Value.Offset.y) / 2;
-            var orthographicSizeWidth = (width + (width - 1) * _config.Value.Offset.x) / 2;
 
-            camera.orthographicSize = _config.Value.GridWidth * (1 + _config.Value.Offset.x) *
-                                      Screen.height / Screen.width / 2f;
+            camera.orthographicSize = _config.Value.GridSize * (1 + _config.Value.Offset) *
+                Screen.height / Screen.width / 2f;
 
+            var orthographicSize = (gridSize + (gridSize - 1) * _config.Value.Offset) / 2;
             _sceneData.Value.CameraTransform.position =
-                new Vector3(orthographicSizeWidth, orthographicSizeHeight);
+                new Vector3(orthographicSize, orthographicSize);
         }
     }
 }
