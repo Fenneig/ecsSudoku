@@ -7,6 +7,8 @@ namespace EcsSudoku.Systems
 {
     public class AnalyzePlacedNumberSystem : IEcsRunSystem
     {
+        private readonly EcsFilterInject<Inc<CellClickedEvent>> _cellClickedEventFilter = Idents.Worlds.Events;
+
         private readonly EcsFilterInject<Inc<PlacedNumber, Position, Number>, Exc<SolvedCell>> _filter = default;
 
         private readonly EcsPoolInject<SolvedCell> _solvedCellsPool = default;
@@ -19,10 +21,18 @@ namespace EcsSudoku.Systems
             {
                 var number = _filter.Pools.Inc3.Get(entity).Value;
                 var position = _filter.Pools.Inc2.Get(entity).Value;
+
                 if (_sceneData.Value.SolvedField[position.Y, position.X] == number)
-                {
                     _solvedCellsPool.Value.Add(entity);
-                }
+            }
+
+            foreach (var entity in _cellClickedEventFilter.Value)
+            {
+                var position = _cellClickedEventFilter.Pools.Inc1.Get(entity).Position;
+                var number = _cellClickedEventFilter.Pools.Inc1.Get(entity).Number;
+
+                if (_sceneData.Value.SolvedField[position.Y, position.X] != number)
+                    _sceneData.Value.MistakeWasMade++;
             }
         }
     }

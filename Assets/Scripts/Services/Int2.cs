@@ -15,5 +15,11 @@
         {
             return $"Position x = {X}, y= {Y}";
         }
+        
+        public static bool operator ==(Int2 obj1, Int2 obj2) =>
+            obj1.X == obj2.X && obj1.Y == obj2.Y;
+
+        public static bool operator !=(Int2 obj1, Int2 obj2) => 
+            !(obj1 == obj2);
     }
 }

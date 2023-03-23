@@ -16,7 +16,9 @@ namespace EcsSudoku.Services
         [Space] [Header("Scene views")]
         public TimerView TimerView;
         public MistakeView MistakeView;
-        [Space] [Header("Scene data fills during game")]
+        [Space] [Header("Scene data fills during game")] 
         public int[,] SolvedField;
+        [HideInInspector]
+        public int MistakeWasMade = 0;
     }
 }

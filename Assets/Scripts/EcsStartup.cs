@@ -1,8 +1,10 @@
+using EcsSudoku.Components;
 using EcsSudoku.Services;
 using EcsSudoku.Systems;
 using EcsSudoku.Systems.Debug;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
+using Leopotam.EcsLite.ExtendedSystems;
 using Leopotam.EcsLite.Unity.Ugui;
 using UnityEngine;
 
@@ -22,32 +24,35 @@ namespace EcsSudoku
             _world = new EcsWorld();
             _systems = new EcsSystems(_world);
             _systems
-                // register your systems here, for example:
-                // .Add (new TestSystem1 ())
-                // .Add (new TestSystem2 ())
+                .AddWorld(new EcsWorld(), Idents.Worlds.Events)
+                
                 .Add(new InitFieldSystem())
                 .Add(new InitCellViewSystem())
                 .Add(new InitAreaSystem())
                 .Add(new InitFieldNumbersSystem())
                 .Add(new InitEraseExtraFieldNumbersSystem())
                 .Add(new UpdateCameraSystem())
+                .Add(new InitUINumberButtonsSystem())
+                
+                .Add(new FillFieldWithNumbersSystem())
+                
                 .Add(new ControlSystem())
                 .Add(new AnalyzeClickSystem())
                 .Add(new MarkSameNumbersSystem())
                 .Add(new RecolorCellsSystem())
-                .Add(new FillFieldWithNumbersSystem())
-                .Add(new InitUINumberButtonsSystem())
+
+
                 .Add(new UguiClickEventSystem())
                 .Add(new AnalyzePlacedNumberSystem())
+                .DelHere<CellClickedEvent>(Idents.Worlds.Events)
+                
                 .Add(new MarkMistakeCellsSystem())
+                
                 .Add(new TimerSystem())
-
-                // register additional worlds here, for example:
-                // .AddWorld (new EcsWorld (), "events")
-                .AddWorld(new EcsWorld(), Idents.Worlds.Events)
+                .Add(new UguiButtonsSwitchSystem())
+                .Add(new GameOverSystem())
+                
 #if UNITY_EDITOR
-                // add debug systems for custom worlds here, for example:
-                // .Add (new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem ("events"))
                 .Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem())
                 .Add(new FieldDebugSystem())
 #endif
