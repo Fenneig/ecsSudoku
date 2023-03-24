@@ -8,9 +8,9 @@ namespace EcsSudoku.Systems
 {
     public class UguiButtonsSwitchSystem : IEcsInitSystem, IEcsRunSystem
     {
-        private readonly EcsFilterInject<Inc<CellClickedEvent>> _filter = Idents.Worlds.Events;
+        private readonly EcsFilterInject<Inc<CellClickedEvent>> _eventFilter = Idents.Worlds.Events;
         private readonly EcsFilterInject<Inc<Number>> _numberFilter = default;
-        
+
         private readonly EcsCustomInject<Configuration> _config = default;
         private readonly EcsCustomInject<SceneData> _sceneData = default;
 
@@ -23,27 +23,34 @@ namespace EcsSudoku.Systems
             {
                 _fieldNumbersCount[i + 1] = 0;
             }
+
+            DisableExtraButtons();
         }
 
         public void Run(IEcsSystems systems)
         {
-            foreach (var _ in _filter.Value)
+            foreach (var _ in _eventFilter.Value)
             {
-                for (int i = 0; i < _config.Value.GridSize; i++)
-                {
-                    _fieldNumbersCount[i + 1] = 0;
-                }
-                
-                foreach (var entity in _numberFilter.Value)
-                {
-                    if (_numberFilter.Pools.Inc1.Get(entity).Value ==0) continue;
-                    _fieldNumbersCount[_numberFilter.Pools.Inc1.Get(entity).Value]++;
-                }
-                
-                foreach (var i in _fieldNumbersCount)
-                {
-                    _sceneData.Value.NumberButtons[i.Key - 1].SetActive(i.Value < 9);
-                } 
+                DisableExtraButtons();
+            }
+        }
+
+        private void DisableExtraButtons()
+        {
+            for (int i = 0; i < _config.Value.GridSize; i++)
+            {
+                _fieldNumbersCount[i + 1] = 0;
+            }
+
+            foreach (var entity in _numberFilter.Value)
+            {
+                if (_numberFilter.Pools.Inc1.Get(entity).Value == 0) continue;
+                _fieldNumbersCount[_numberFilter.Pools.Inc1.Get(entity).Value]++;
+            }
+
+            foreach (var i in _fieldNumbersCount)
+            {
+                _sceneData.Value.NumberButtons[i.Key - 1].SetActive(i.Value < 9);
             }
         }
     }

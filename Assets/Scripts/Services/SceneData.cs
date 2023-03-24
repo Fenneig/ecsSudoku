@@ -12,10 +12,7 @@ namespace EcsSudoku.Services
         [Space] [Header("Transforms for instantiate objects")]
         public Transform FieldTransform;
         public Transform NumberButtonsTransform;
-        
-        [Space] [Header("Game settings")]
-        public int Difficult = 30;
-        
+
         [Space] [Header("Scene views")]
         public TimerView TimerView;
         public MistakeView MistakeView;
@@ -26,5 +23,17 @@ namespace EcsSudoku.Services
         public int MistakeWasMade = 0;
         [HideInInspector] 
         public GameObject[] NumberButtons;
+        [HideInInspector] 
+        public bool GameOnPause = false;
+
+        [Space] [Header("Game over views")] 
+        public WinView WinView;
+        public GameObject LoseView;
+
+        private void Awake()
+        {
+            CameraTransform = Camera.main.transform;
+            Camera = Camera.main;
+        }
     }
 }

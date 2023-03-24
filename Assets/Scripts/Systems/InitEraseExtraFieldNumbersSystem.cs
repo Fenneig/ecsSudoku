@@ -12,7 +12,6 @@ namespace EcsSudoku.Systems
         
         private readonly EcsPoolInject<SolvedCell> _solvedCellPool = default;
         
-        private readonly EcsCustomInject<SceneData> _sceneData = default;
         private readonly EcsCustomInject<Configuration> _config = default;
 
         public void Init(IEcsSystems systems)
@@ -25,7 +24,7 @@ namespace EcsSudoku.Systems
                 field[position.Y, position.X] = _numberFilter.Pools.Inc1.Get(entity).Value;
             }
 
-            int count = _config.Value.GridSize * _config.Value.GridSize - _sceneData.Value.Difficult;
+            int count = _config.Value.GridSize * _config.Value.GridSize - _config.Value.Difficult;
 
             while (count != 0)
             {

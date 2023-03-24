@@ -13,6 +13,8 @@ namespace EcsSudoku.Systems
         
         public void Run(IEcsSystems systems)
         {
+            if (_sceneData.Value.GameOnPause) return;
+            
             _timePassed += Time.deltaTime;
             int minutes = (int) _timePassed / 60;
             int seconds = (int) _timePassed % 60;

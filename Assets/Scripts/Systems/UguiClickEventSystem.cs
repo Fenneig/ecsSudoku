@@ -3,6 +3,7 @@ using EcsSudoku.Services;
 using EcsSudoku.Views;
 using Leopotam.EcsLite.Di;
 using Leopotam.EcsLite.Unity.Ugui;
+using UnityEngine.SceneManagement;
 using UnityEngine.Scripting;
 
 namespace EcsSudoku.Systems
@@ -32,6 +33,13 @@ namespace EcsSudoku.Systems
                 cellClickedEvent.Number = number;
                 cellClickedEvent.Position = _filter.Pools.Inc3.Get(entity).Value;
             }
+        }
+
+        [Preserve]
+        [EcsUguiClickEvent("RestartButton")]
+        private void OnRestartClick(in EcsUguiClickEvent e)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 }

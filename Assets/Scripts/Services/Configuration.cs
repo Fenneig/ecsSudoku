@@ -14,5 +14,8 @@ namespace EcsSudoku.Services
         public CellView CellViewPrefab;
         public GameObject CellAreaPrefab;
         public GameObject NumberButtonPrefab;
+        [Space] [Header("Game settings")]
+        public int Difficult = 30;
+        public int MaxMistakes = 3;
     }
 }

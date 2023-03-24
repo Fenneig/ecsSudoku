@@ -5,6 +5,6 @@ namespace EcsSudoku.Views
 {
     public class MistakeView : MonoBehaviour
     {
-        public TextMeshProUGUI Text;
+        public TextMeshProUGUI TmpText;
     }
 }

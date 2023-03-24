@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GridSize: 9
   AreaSize: 3
-  Offset: 0.04
+  Offset: 0.05
   CellViewPrefab: {fileID: 4289142860148584083, guid: f9a2f664042183d48ac7be3565e0c789, type: 3}
   CellAreaPrefab: {fileID: 2105376239619082306, guid: e19cfd001e6693a419577d987d8c1b57, type: 3}
   NumberButtonPrefab: {fileID: 3139806218849174815, guid: 3f366977eb6c97c41872b93fbb74f41e, type: 3}
+  Difficult: 25
+  MaxMistakes: 3

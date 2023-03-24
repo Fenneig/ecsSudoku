@@ -8,17 +8,19 @@ using UnityEngine.InputSystem;
 
 namespace EcsSudoku.Systems
 {
-    public class ControlSystem : IEcsInitSystem, SudokuInput.ISudokuActions
+    public class ControlSystem : IEcsInitSystem, IEcsDestroySystem, SudokuInput.ISudokuActions
     {
         private readonly EcsFilterInject<Inc<Clicked>> _clickedFilter = default;
         
         private readonly EcsCustomInject<SceneData> _sceneData = default;
 
+        private SudokuInput _input;
+
         public void Init(IEcsSystems systems)
         {
-            SudokuInput input = new SudokuInput();
-            input.Enable();
-            input.Sudoku.SetCallbacks(this);
+            _input = new SudokuInput();
+            _input.Enable();
+            _input.Sudoku.SetCallbacks(this);
         }
         
         public void OnClick(InputAction.CallbackContext context)
@@ -37,6 +39,11 @@ namespace EcsSudoku.Systems
                 _clickedFilter.Pools.Inc1.Del(entity);
 
             _clickedFilter.Pools.Inc1.Add(cellView.Entity);
+        }
+
+        public void Destroy(IEcsSystems systems)
+        {
+            _input.Sudoku.Disable();
         }
     }
 }

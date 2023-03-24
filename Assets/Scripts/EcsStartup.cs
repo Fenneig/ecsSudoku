@@ -50,6 +50,7 @@ namespace EcsSudoku
                 .Add(new MarkMistakeCellsSystem())
                 
                 .Add(new TimerSystem())
+                .Add(new MistakeViewUpdateSystem())
                 .Add(new GameOverSystem())
                 
 #if UNITY_EDITOR
@@ -63,7 +64,6 @@ namespace EcsSudoku
 
         void Update()
         {
-            // process systems here.
             _systems?.Run();
         }
 
@@ -71,16 +71,9 @@ namespace EcsSudoku
         {
             if (_systems != null)
             {
-                // list of custom worlds will be cleared
-                // during IEcsSystems.Destroy(). so, you
-                // need to save it here if you need.
                 _systems.Destroy();
                 _systems = null;
             }
-
-            // cleanup custom worlds here.
-
-            // cleanup default world.
             if (_world != null)
             {
                 _world.Destroy();
