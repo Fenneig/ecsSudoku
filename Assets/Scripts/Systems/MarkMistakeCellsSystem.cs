@@ -38,11 +38,11 @@ namespace EcsSudoku.Systems
             {
                 var position = _placedNumbersFilter.Pools.Inc2.Get(entity).Value;
                 var number = _placedNumbersFilter.Pools.Inc3.Get(entity).Value;
-                MarkLinkedCellsAsMistakes(position, number);
+                MarkLinkedCellsAsMistakeHint(position, number);
             }
         }
 
-        private void MarkLinkedCellsAsMistakes(Int2 position, int number)
+        private void MarkLinkedCellsAsMistakeHint(Int2 position, int number)
         {
             for (int y = 0; y < _config.Value.GridSize; y++)
             {

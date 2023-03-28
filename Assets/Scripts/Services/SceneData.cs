@@ -1,4 +1,5 @@
 using EcsSudoku.Views;
+using TMPro;
 using UnityEngine;
 
 namespace EcsSudoku.Services
@@ -25,10 +26,15 @@ namespace EcsSudoku.Services
         public GameObject[] NumberButtons;
         [HideInInspector] 
         public bool GameOnPause = false;
+        [HideInInspector] 
+        public bool NoteMode = false;
 
         [Space] [Header("Game over views")] 
         public WinView WinView;
         public GameObject LoseView;
+        
+        [Space] [Header("Scene buttons texts")]
+        public TextMeshProUGUI NotesStateText;
 
         private void Awake()
         {

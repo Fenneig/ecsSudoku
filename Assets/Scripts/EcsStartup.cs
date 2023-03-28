@@ -31,26 +31,25 @@ namespace EcsSudoku
                 .Add(new InitAreaSystem())
                 .Add(new InitFieldNumbersSystem())
                 .Add(new InitEraseExtraFieldNumbersSystem())
-                .Add(new UpdateCameraSystem())
+                .Add(new InitCameraSystem())
                 .Add(new InitUINumberButtonsSystem())
-                
-                .Add(new FillFieldWithNumbersSystem())
                 
                 .Add(new ControlSystem())
                 .Add(new AnalyzeClickSystem())
                 .Add(new MarkSameNumbersSystem())
                 .Add(new RecolorCellsSystem())
 
-
                 .Add(new UguiClickEventSystem())
-                .Add(new AnalyzePlacedNumberSystem())
+                .Add(new PlaceNoteSystem())
+                .Add(new PlaceNumberSystem())
                 .Add(new UguiButtonsSwitchSystem())
+                .Add(new FillFieldWithNumbersSystem())
+                .Add(new MistakeViewUpdateSystem())
                 .DelHere<CellClickedEvent>(Idents.Worlds.Events)
                 
                 .Add(new MarkMistakeCellsSystem())
                 
                 .Add(new TimerSystem())
-                .Add(new MistakeViewUpdateSystem())
                 .Add(new GameOverSystem())
                 
 #if UNITY_EDITOR

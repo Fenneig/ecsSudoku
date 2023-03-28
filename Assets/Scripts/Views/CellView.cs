@@ -8,5 +8,6 @@ namespace EcsSudoku.Views
         public SpriteRenderer Background; 
         public TextMeshProUGUI NumberText;
         public int Entity;
+        public Notes Notes;
     }
 }

@@ -12,26 +12,20 @@ namespace EcsSudoku.Systems
     {
         private readonly EcsFilterInject<Inc<Clicked, Number, Position>, Exc<SolvedCell>> _filter = default;
 
-        private readonly EcsPoolInject<PlacedNumber> _placedPool = default;
         private readonly EcsPoolInject<CellClickedEvent> _cellClickedEventPool = Idents.Worlds.Events;
+
+        private readonly EcsCustomInject<SceneData> _sceneData = default;
 
         [Preserve]
         [EcsUguiClickEvent("NumberButton")]
         private void OnButtonClick(in EcsUguiClickEvent e)
         {
-            var number = int.Parse(e.Sender.GetComponent<NumberButtonView>().NumberText.text);
-
             foreach (var entity in _filter.Value)
             {
-                _filter.Pools.Inc2.Get(entity).Value = number;
-
-                if (!_placedPool.Value.Has(entity))
-                    _placedPool.Value.Add(entity);
-
-                ref var cellClickedEvent =
-                    ref _cellClickedEventPool.Value.Add(_cellClickedEventPool.Value.GetWorld().NewEntity());
+                var number = int.Parse(e.Sender.GetComponent<NumberButtonView>().NumberText.text);
+                ref var cellClickedEvent = ref _cellClickedEventPool.Value.Add(_cellClickedEventPool.Value.GetWorld().NewEntity());
                 cellClickedEvent.Number = number;
-                cellClickedEvent.Position = _filter.Pools.Inc3.Get(entity).Value;
+                cellClickedEvent.CellEntity = entity;
             }
         }
 
@@ -40,6 +34,17 @@ namespace EcsSudoku.Systems
         private void OnRestartClick(in EcsUguiClickEvent e)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        [Preserve]
+        [EcsUguiClickEvent("NotesButton")]
+        private void OnNotesClicked(in EcsUguiClickEvent e)
+        {
+            _sceneData.Value.NoteMode = !_sceneData.Value.NoteMode;
+            _sceneData.Value.NotesStateText.text = _sceneData.Value.NoteMode ? "ON" : "OFF";
+            _sceneData.Value.NotesStateText.color = _sceneData.Value.NoteMode
+                ? Idents.Colors.ButtonTextSwitchOn
+                : Idents.Colors.ButtonTextSwitchOff;
         }
     }
 }

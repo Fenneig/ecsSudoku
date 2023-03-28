@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace EcsSudoku.Systems
 {
-    public class UpdateCameraSystem : IEcsInitSystem
+    public class InitCameraSystem : IEcsInitSystem
     {
         private readonly EcsCustomInject<SceneData> _sceneData = default;
         private readonly EcsCustomInject<Configuration> _config = default;
