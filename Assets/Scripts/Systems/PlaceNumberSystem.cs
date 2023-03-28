@@ -19,9 +19,9 @@ namespace EcsSudoku.Systems
         {
             if (_sceneData.Value.NoteMode) return;
             
-            foreach (var entity in _cellClickedEventFilter.Value)
+            foreach (var eventEntity in _cellClickedEventFilter.Value)
             {
-                ref var eventInfo = ref _cellClickedEventFilter.Pools.Inc1.Get(entity);
+                ref var eventInfo = ref _cellClickedEventFilter.Pools.Inc1.Get(eventEntity);
                 
                 _filter.Pools.Inc3.Get(eventInfo.CellEntity).Value = eventInfo.Number;
 

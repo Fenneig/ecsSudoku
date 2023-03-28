@@ -45,6 +45,7 @@ namespace EcsSudoku
                 .Add(new UguiButtonsSwitchSystem())
                 .Add(new FillFieldWithNumbersSystem())
                 .Add(new MistakeViewUpdateSystem())
+                .Add(new HideExtraNoteSystem())
                 .DelHere<CellClickedEvent>(Idents.Worlds.Events)
                 
                 .Add(new MarkMistakeCellsSystem())

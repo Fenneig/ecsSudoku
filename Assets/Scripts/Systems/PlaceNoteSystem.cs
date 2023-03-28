@@ -16,9 +16,9 @@ namespace EcsSudoku.Systems
 
         public void Run(IEcsSystems systems)
         {
-            foreach (var entity in _cellClickedEventFilter.Value)
+            foreach (var eventEntity in _cellClickedEventFilter.Value)
             {
-                var cellEntity = _cellClickedEventFilter.Pools.Inc1.Get(entity).CellEntity;
+                var cellEntity = _cellClickedEventFilter.Pools.Inc1.Get(eventEntity).CellEntity;
 
                 if (!_sceneData.Value.NoteMode)
                 {
@@ -28,7 +28,7 @@ namespace EcsSudoku.Systems
                 
                 var cellView = _cellViews.Value.Get(cellEntity);
 
-                var noteNumberToSwitch = _cellClickedEventFilter.Pools.Inc1.Get(entity).Number - 1;
+                var noteNumberToSwitch = _cellClickedEventFilter.Pools.Inc1.Get(eventEntity).Number - 1;
 
                 cellView.Value.Notes.NoteNumber[noteNumberToSwitch]
                     .SetActive(!cellView.Value.Notes.NoteNumber[noteNumberToSwitch].activeSelf);
