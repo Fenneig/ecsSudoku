@@ -40,6 +40,7 @@ namespace EcsSudoku.Services
         {
             CameraTransform = Camera.main.transform;
             Camera = Camera.main;
+            Application.targetFrameRate = 20;
         }
     }
 }
