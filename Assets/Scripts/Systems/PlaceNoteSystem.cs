@@ -25,10 +25,10 @@ namespace EcsSudoku.Systems
                     _cellViews.Value.Get(cellEntity).Value.Notes.NoteGO.SetActive(false);
                     return;
                 }
-                
-                var cellView = _cellViews.Value.Get(cellEntity);
 
                 var noteNumberToSwitch = _cellClickedEventFilter.Pools.Inc1.Get(eventEntity).Number - 1;
+                
+                var cellView = _cellViews.Value.Get(cellEntity);
 
                 cellView.Value.Notes.NoteNumber[noteNumberToSwitch]
                     .SetActive(!cellView.Value.Notes.NoteNumber[noteNumberToSwitch].activeSelf);

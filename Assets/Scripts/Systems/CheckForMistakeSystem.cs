@@ -5,13 +5,16 @@ using Leopotam.EcsLite.Di;
 
 namespace EcsSudoku.Systems
 {
-    public class PlaceNumberSystem : IEcsRunSystem
+    public class CheckForMistakeSystem : IEcsRunSystem
     {
         private readonly EcsFilterInject<Inc<CellClickedEvent>> _cellClickedEventFilter = Idents.Worlds.Events;
 
-        private readonly EcsFilterInject<Inc<Number>, Exc<SolvedCell>> _filter = default;
+        private readonly EcsFilterInject<Inc<Position, Number>, Exc<SolvedCell>> _filter = default;
 
         private readonly EcsCustomInject<SceneData> _sceneData = default;
+        
+        private readonly EcsPoolInject<SolvedCell> _solvedCellsPool = default;
+
 
         public void Run(IEcsSystems systems)
         {
@@ -21,7 +24,12 @@ namespace EcsSudoku.Systems
             {
                 var eventInfo = _cellClickedEventFilter.Pools.Inc1.Get(eventEntity);
                 
-                _filter.Pools.Inc1.Get(eventInfo.CellEntity).Value = eventInfo.Number;
+                var position = _filter.Pools.Inc1.Get(eventInfo.CellEntity).Value;
+
+                if (_sceneData.Value.SolvedField[position.Y, position.X] == eventInfo.Number)
+                    _solvedCellsPool.Value.Add(eventInfo.CellEntity);
+                else
+                    _sceneData.Value.MistakeWasMade++;
             }
         }
     }

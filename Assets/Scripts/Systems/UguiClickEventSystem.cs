@@ -13,6 +13,7 @@ namespace EcsSudoku.Systems
         private readonly EcsFilterInject<Inc<Clicked, Number, Position>, Exc<SolvedCell>> _filter = default;
 
         private readonly EcsPoolInject<CellClickedEvent> _cellClickedEventPool = Idents.Worlds.Events;
+        private readonly EcsPoolInject<CellEraseEvent> _cellErasedEventPool = Idents.Worlds.Events;
 
         private readonly EcsCustomInject<SceneData> _sceneData = default;
 
@@ -23,7 +24,10 @@ namespace EcsSudoku.Systems
             foreach (var entity in _filter.Value)
             {
                 var number = int.Parse(e.Sender.GetComponent<NumberButtonView>().NumberText.text);
-                ref var cellClickedEvent = ref _cellClickedEventPool.Value.Add(_cellClickedEventPool.Value.GetWorld().NewEntity());
+
+                ref var cellClickedEvent =
+                    ref _cellClickedEventPool.Value.Add(_cellClickedEventPool.Value.GetWorld().NewEntity());
+                
                 cellClickedEvent.Number = number;
                 cellClickedEvent.CellEntity = entity;
             }
@@ -45,6 +49,16 @@ namespace EcsSudoku.Systems
             _sceneData.Value.NotesStateText.color = _sceneData.Value.NoteMode
                 ? Idents.Colors.ButtonTextSwitchOn
                 : Idents.Colors.ButtonTextSwitchOff;
+        }
+
+        [Preserve]
+        [EcsUguiClickEvent("EraseButton")]
+        private void OnEraseClicked(in EcsUguiClickEvent e)
+        {
+            foreach (var entity in _filter.Value)
+            {
+                _cellErasedEventPool.Value.Add(_cellErasedEventPool.Value.GetWorld().NewEntity()).CellEntity = entity;
+            }
         }
     }
 }

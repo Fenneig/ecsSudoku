@@ -35,17 +35,21 @@ namespace EcsSudoku
                 .Add(new InitUINumberButtonsSystem())
                 
                 .Add(new ControlSystem())
-                .Add(new AnalyzeClickSystem())
+                .Add(new FillLinkedCellsSystem())
                 .Add(new MarkSameNumbersSystem())
                 .Add(new RecolorCellsSystem())
 
                 .Add(new UguiClickEventSystem())
+                .Add(new EraseNumberSystem())    
                 .Add(new PlaceNoteSystem())
                 .Add(new PlaceNumberSystem())
+                .Add(new CheckForMistakeSystem())
+                .Add(new PlacedMarkSystem())
                 .Add(new UguiButtonsSwitchSystem())
                 .Add(new FillFieldWithNumbersSystem())
                 .Add(new MistakeViewUpdateSystem())
                 .Add(new HideExtraNoteSystem())
+                .DelHere<CellEraseEvent>(Idents.Worlds.Events)
                 .DelHere<CellClickedEvent>(Idents.Worlds.Events)
                 
                 .Add(new MarkMistakeCellsSystem())

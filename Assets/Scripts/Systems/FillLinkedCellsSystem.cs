@@ -5,7 +5,7 @@ using Leopotam.EcsLite.Di;
 
 namespace EcsSudoku.Systems
 {
-    public class AnalyzeClickSystem : IEcsInitSystem, IEcsRunSystem
+    public class FillLinkedCellsSystem : IEcsInitSystem, IEcsRunSystem
     {
         private readonly EcsFilterInject<Inc<Position>> _positionFilter = default;
         private readonly EcsFilterInject<Inc<LinkedCell>> _linkedCellsFilter = default;
