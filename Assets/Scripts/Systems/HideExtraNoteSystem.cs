@@ -22,7 +22,7 @@ namespace EcsSudoku.Systems
                 
                 foreach (var entity in _filter.Value)
                 {
-                    _filter.Pools.Inc2.Get(entity).Value.Notes.NoteNumber[noteNumberToDeactivate].SetActive(false);
+                    _filter.Pools.Inc2.Get(entity).Value.Notes.NoteNumberGO[noteNumberToDeactivate].SetActive(false);
                 }
             }
         }

@@ -40,7 +40,9 @@ namespace EcsSudoku
                 .Add(new RecolorCellsSystem())
 
                 .Add(new UguiClickEventSystem())
-                .Add(new EraseNumberSystem())    
+                .Add(new PlayerMoveSystem())
+                .Add(new RollBackSystem())
+                .Add(new EraseNumberSystem())
                 .Add(new PlaceNoteSystem())
                 .Add(new PlaceNumberSystem())
                 .Add(new CheckForMistakeSystem())
@@ -51,6 +53,7 @@ namespace EcsSudoku
                 .Add(new HideExtraNoteSystem())
                 .DelHere<CellEraseEvent>(Idents.Worlds.Events)
                 .DelHere<CellAddNumberEvent>(Idents.Worlds.Events)
+                .DelHere<RollbackEvent>(Idents.Worlds.Events)
                 
                 .Add(new MarkMistakeCellsSystem())
                 

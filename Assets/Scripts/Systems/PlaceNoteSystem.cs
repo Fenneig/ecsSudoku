@@ -30,8 +30,8 @@ namespace EcsSudoku.Systems
                 
                 var cellView = _cellViews.Value.Get(cellEntity);
 
-                cellView.Value.Notes.NoteNumber[noteNumberToSwitch]
-                    .SetActive(!cellView.Value.Notes.NoteNumber[noteNumberToSwitch].activeSelf);
+                cellView.Value.Notes.NoteNumberGO[noteNumberToSwitch]
+                    .SetActive(!cellView.Value.Notes.NoteNumberGO[noteNumberToSwitch].activeSelf);
             }
         }
     }

@@ -201,7 +201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NoteGO: {fileID: 8966835206456654644}
-  NoteNumber:
+  NoteNumberGO:
   - {fileID: 2386642526212425911}
   - {fileID: 5781144407666565921}
   - {fileID: 3388155869924976805}

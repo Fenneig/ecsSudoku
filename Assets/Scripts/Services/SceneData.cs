@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using EcsSudoku.Components;
 using EcsSudoku.Views;
 using TMPro;
 using UnityEngine;
@@ -28,6 +30,7 @@ namespace EcsSudoku.Services
         public bool GameOnPause = false;
         [HideInInspector] 
         public bool NoteMode = false;
+        public Stack<PlayerMove> PlayerMoves;
 
         [Space] [Header("Game over views")] 
         public WinView WinView;
@@ -41,6 +44,7 @@ namespace EcsSudoku.Services
             CameraTransform = Camera.main.transform;
             Camera = Camera.main;
             Application.targetFrameRate = 30;
+            PlayerMoves = new Stack<PlayerMove>();
         }
     }
 }

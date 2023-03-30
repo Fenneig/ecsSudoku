@@ -18,7 +18,7 @@ namespace EcsSudoku.Systems
                 
                 _filter.Pools.Inc1.Get(cellEntity).Value = 0;
                 
-                foreach (var noteNumber in _filter.Pools.Inc2.Get(cellEntity).Value.Notes.NoteNumber)
+                foreach (var noteNumber in _filter.Pools.Inc2.Get(cellEntity).Value.Notes.NoteNumberGO)
                     noteNumber.SetActive(false);
                 
                 _filter.Pools.Inc2.Get(cellEntity).Value.Notes.NoteGO.SetActive(true);

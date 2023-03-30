@@ -14,6 +14,7 @@ namespace EcsSudoku.Systems
 
         private readonly EcsPoolInject<CellAddNumberEvent> _cellAddNumberEventPool = Idents.Worlds.Events;
         private readonly EcsPoolInject<CellEraseEvent> _cellErasedEventPool = Idents.Worlds.Events;
+        private readonly EcsPoolInject<RollbackEvent> _rollbackEventPool = Idents.Worlds.Events;
 
         private readonly EcsCustomInject<SceneData> _sceneData = default;
 
@@ -59,6 +60,13 @@ namespace EcsSudoku.Systems
             {
                 _cellErasedEventPool.Value.Add(_cellErasedEventPool.Value.GetWorld().NewEntity()).CellEntity = entity;
             }
+        }
+
+        [Preserve]
+        [EcsUguiClickEvent("Rollback")]
+        private void OnRollbackClicked(in EcsUguiClickEvent e)
+        {
+            _rollbackEventPool.Value.Add(_rollbackEventPool.Value.GetWorld().NewEntity());
         }
     }
 }
