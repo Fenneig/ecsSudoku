@@ -9,16 +9,16 @@ namespace EcsSudoku.Systems
     {
         private readonly EcsCustomInject<SceneData> _sceneData = default;
         
-        private readonly EcsFilterInject<Inc<CellClickedEvent>> _cellClickedEventFilter = Idents.Worlds.Events;
+        private readonly EcsFilterInject<Inc<CellAddNumberEvent>> _cellAddNumberEvent = Idents.Worlds.Events;
         
         private readonly EcsPoolInject<CellViewRef> _cellViews = default;
 
 
         public void Run(IEcsSystems systems)
         {
-            foreach (var eventEntity in _cellClickedEventFilter.Value)
+            foreach (var eventEntity in _cellAddNumberEvent.Value)
             {
-                var cellEntity = _cellClickedEventFilter.Pools.Inc1.Get(eventEntity).CellEntity;
+                var cellEntity = _cellAddNumberEvent.Pools.Inc1.Get(eventEntity).CellEntity;
 
                 if (!_sceneData.Value.NoteMode)
                 {
@@ -26,7 +26,7 @@ namespace EcsSudoku.Systems
                     return;
                 }
 
-                var noteNumberToSwitch = _cellClickedEventFilter.Pools.Inc1.Get(eventEntity).Number - 1;
+                var noteNumberToSwitch = _cellAddNumberEvent.Pools.Inc1.Get(eventEntity).Number - 1;
                 
                 var cellView = _cellViews.Value.Get(cellEntity);
 

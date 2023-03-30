@@ -10,7 +10,7 @@ namespace EcsSudoku.Systems
         private readonly EcsCustomInject<SceneData> _sceneData = default;
         private readonly EcsCustomInject<Configuration> _config = default;
 
-        private readonly EcsFilterInject<Inc<CellClickedEvent>> _event = Idents.Worlds.Events;
+        private readonly EcsFilterInject<Inc<CellAddNumberEvent>> _event = Idents.Worlds.Events;
 
         public void Run(IEcsSystems systems)
         {

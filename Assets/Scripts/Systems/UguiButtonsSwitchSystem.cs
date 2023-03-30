@@ -8,7 +8,7 @@ namespace EcsSudoku.Systems
 {
     public class UguiButtonsSwitchSystem : IEcsInitSystem, IEcsRunSystem
     {
-        private readonly EcsFilterInject<Inc<CellClickedEvent>> _eventFilter = Idents.Worlds.Events;
+        private readonly EcsFilterInject<Inc<CellAddNumberEvent>> _eventFilter = Idents.Worlds.Events;
         private readonly EcsFilterInject<Inc<Number>> _numberFilter = default;
 
         private readonly EcsCustomInject<Configuration> _config = default;

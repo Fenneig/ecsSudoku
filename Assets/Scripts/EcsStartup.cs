@@ -50,7 +50,7 @@ namespace EcsSudoku
                 .Add(new MistakeViewUpdateSystem())
                 .Add(new HideExtraNoteSystem())
                 .DelHere<CellEraseEvent>(Idents.Worlds.Events)
-                .DelHere<CellClickedEvent>(Idents.Worlds.Events)
+                .DelHere<CellAddNumberEvent>(Idents.Worlds.Events)
                 
                 .Add(new MarkMistakeCellsSystem())
                 

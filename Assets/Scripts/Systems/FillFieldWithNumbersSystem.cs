@@ -8,7 +8,7 @@ namespace EcsSudoku.Systems
     public class FillFieldWithNumbersSystem : IEcsRunSystem, IEcsInitSystem
     {
         private readonly EcsFilterInject<Inc<CellViewRef, Number>> _filter = default;
-        private readonly EcsFilterInject<Inc<CellClickedEvent>> _cellClickedEvent = Idents.Worlds.Events;
+        private readonly EcsFilterInject<Inc<CellAddNumberEvent>> _cellAddNumberEvent = Idents.Worlds.Events;
         private readonly EcsFilterInject<Inc<CellEraseEvent>> _cellEraseEvent = Idents.Worlds.Events;
 
         public void Init(IEcsSystems systems)
@@ -18,7 +18,7 @@ namespace EcsSudoku.Systems
 
         public void Run(IEcsSystems systems)
         {
-            foreach (var _ in _cellClickedEvent.Value)
+            foreach (var _ in _cellAddNumberEvent.Value)
             {
                 FillField();
             }

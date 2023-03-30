@@ -7,7 +7,7 @@ namespace EcsSudoku.Systems
 {
     public class HideExtraNoteSystem : IEcsRunSystem
     {
-        private readonly EcsFilterInject<Inc<CellClickedEvent>> _event = Idents.Worlds.Events;
+        private readonly EcsFilterInject<Inc<CellAddNumberEvent>> _event = Idents.Worlds.Events;
         private readonly EcsFilterInject<Inc<LinkedCell, CellViewRef>> _filter = default;
 
         private readonly EcsCustomInject<SceneData> _sceneData = default;

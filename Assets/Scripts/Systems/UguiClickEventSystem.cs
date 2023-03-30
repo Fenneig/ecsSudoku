@@ -12,7 +12,7 @@ namespace EcsSudoku.Systems
     {
         private readonly EcsFilterInject<Inc<Clicked, Number, Position>, Exc<SolvedCell>> _filter = default;
 
-        private readonly EcsPoolInject<CellClickedEvent> _cellClickedEventPool = Idents.Worlds.Events;
+        private readonly EcsPoolInject<CellAddNumberEvent> _cellAddNumberEventPool = Idents.Worlds.Events;
         private readonly EcsPoolInject<CellEraseEvent> _cellErasedEventPool = Idents.Worlds.Events;
 
         private readonly EcsCustomInject<SceneData> _sceneData = default;
@@ -25,11 +25,11 @@ namespace EcsSudoku.Systems
             {
                 var number = int.Parse(e.Sender.GetComponent<NumberButtonView>().NumberText.text);
 
-                ref var cellClickedEvent =
-                    ref _cellClickedEventPool.Value.Add(_cellClickedEventPool.Value.GetWorld().NewEntity());
+                ref var cellAddNumberEvent =
+                    ref _cellAddNumberEventPool.Value.Add(_cellAddNumberEventPool.Value.GetWorld().NewEntity());
                 
-                cellClickedEvent.Number = number;
-                cellClickedEvent.CellEntity = entity;
+                cellAddNumberEvent.Number = number;
+                cellAddNumberEvent.CellEntity = entity;
             }
         }
 

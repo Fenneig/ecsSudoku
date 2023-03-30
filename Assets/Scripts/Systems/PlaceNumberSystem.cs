@@ -7,7 +7,7 @@ namespace EcsSudoku.Systems
 {
     public class PlaceNumberSystem : IEcsRunSystem
     {
-        private readonly EcsFilterInject<Inc<CellClickedEvent>> _cellClickedEventFilter = Idents.Worlds.Events;
+        private readonly EcsFilterInject<Inc<CellAddNumberEvent>> _cellAddNumberEvent = Idents.Worlds.Events;
 
         private readonly EcsFilterInject<Inc<Number>, Exc<SolvedCell>> _filter = default;
 
@@ -17,9 +17,9 @@ namespace EcsSudoku.Systems
         {
             if (_sceneData.Value.NoteMode) return;
             
-            foreach (var eventEntity in _cellClickedEventFilter.Value)
+            foreach (var eventEntity in _cellAddNumberEvent.Value)
             {
-                var eventInfo = _cellClickedEventFilter.Pools.Inc1.Get(eventEntity);
+                var eventInfo = _cellAddNumberEvent.Pools.Inc1.Get(eventEntity);
                 
                 _filter.Pools.Inc1.Get(eventInfo.CellEntity).Value = eventInfo.Number;
             }
